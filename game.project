@@ -15,7 +15,8 @@ package = com.defold.example.basic3d
 
 [project]
 title = GGJ-2023
-dependencies#0 = https://github.com/dapetcu21/defold-fmod/archive/v2.0.0.zip
+custom_resources = assets/sound/
+dependencies#0 = https://github.com/dapetcu21/defold-fmod/archive/v2.6.1.zip
 
 [physics]
 type = 3D
@@ -28,3 +29,4 @@ bundle_identifier = com.defold.example.basic3d
 
 [fmod]
 lib_path = /fmod-libs
+
