@@ -14,8 +14,9 @@ input_method = HiddenInputField
 package = com.defold.example.basic3d
 
 [project]
-dependencies = 
 title = GGJ-2023
+custom_resources = assets/sound/
+dependencies#0 = https://github.com/dapetcu21/defold-fmod/archive/v2.6.1.zip
 
 [physics]
 type = 3D
@@ -25,4 +26,7 @@ bundle_identifier = com.defold.example.basic3d
 
 [ios]
 bundle_identifier = com.defold.example.basic3d
+
+[fmod]
+lib_path = /fmod-libs
 
