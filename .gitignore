@@ -9,3 +9,12 @@ Thumbs.db
 .cproject
 builtins
 .cache
+fmod/.cache/*
+fmod/.unsaved/*
+fmod/.user/*
+fmod/.user/Metadata/Workspace.user.xml
+fmod/.user/Metadata/Mixer.user.xml
+fmod/.user/Metadata/Asset/{4c43130b-9186-4fb6-9d65-a9acdac70927}.user.xml
+fmod/.unsaved/.user/Metadata/Workspace.user.xml
+fmod/.unsaved/.user/Metadata/Mixer.user.xml
+fmod/.unsaved/.user/Metadata/Asset/{4c43130b-9186-4fb6-9d65-a9acdac70927}.user.xml
