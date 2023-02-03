@@ -1,0 +1,69 @@
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	msg.post("@render:", "use_camera_projection")
+	msg.post("camera", "acquire_camera_focus")
+
+	-- rotate the cube
+	go.animate(".", "euler.z", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 6)
+	go.animate(".", "euler.x", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 9)
+	go.animate(".", "euler.y", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 12)
+
+	-- tint the cube and the sphere
+	model.set_constant("#cube", "tint", vmath.vector4(1,1,0,1))
+	model.set_constant("#sphere", "tint", vmath.vector4(1,0,0,1))
+	
+	-- position directional light
+	self.light = vmath.vector4(0, 0, go.get_position().z + 1, 0)
+	model.set_constant("#cube", "light", self.light)
+	model.set_constant("#quad", "light", self.light)
+	model.set_constant("#sphere", "light", self.light)
+
+	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Master.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Music.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Vehicles.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+
+	local event_description = fmod.studio.system:get_event("event:/Vehicles/Car Engine")
+	local event = event_description:create_instance()
+	self.event = event
+
+	-- Error handling example
+	local ok, err = pcall(function ()
+		fmod.studio.system:get_event("event:/Inexistent event")
+	end)
+	if not ok then
+		print(err)
+		local code = fmod.error_code[err] -- The FMOD error code (a number).
+		print(code)
+		if code == fmod.ERR_EVENT_NOTFOUND then
+			print("Ooops! This event doesn't exist!")
+		end
+	end
+
+	local listener_attr = fmod._3D_ATTRIBUTES()
+	self.listener_attr = listener_attr
+	listener_attr.position = go.get_world_position("listener") * world_scale
+	listener_attr.velocity = vmath.vector3(0.0)
+	listener_attr.forward = vmath.vector3(0.0, 1.0, 0.0)
+	listener_attr.up = vmath.vector3(0.0, 0.0, -1.0)
+	fmod.studio.system:set_listener_attributes(0, listener_attr)
+
+	local source_attr = fmod._3D_ATTRIBUTES()
+	self.source_attr = source_attr
+	source_attr.position = go.get_world_position("source") * world_scale
+	source_attr.velocity = vmath.vector3(0.0)
+	source_attr.forward = vmath.vector3(0.0, 1.0, 0.0)
+	source_attr.up = vmath.vector3(0.0, 0.0, -1.0)
+	event:set_3d_attributes(source_attr)
+
+	event:set_parameter_by_name("RPM", 650.0, false)
+	event:start()
+end
+
+function on_input(self, action_id, action)
+	-- move directional light based on input
+	self.light.x = 2 * ((action.x - 480) / 480)
+	self.light.y = 2 * ((action.y - 320) / 320)
+	model.set_constant("#cube", "light", self.light)
+	model.set_constant("#quad", "light", self.light)
+	model.set_constant("#sphere", "light", self.light)
+end

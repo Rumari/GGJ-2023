@@ -1,0 +1,34 @@
+[bootstrap]
+main_collection = /main/main.collectionc
+render = /main/main.renderc
+
+[script]
+shared_state = 1
+
+[display]
+width = 960
+height = 640
+
+[android]
+input_method = HiddenInputField
+package = com.defold.example.basic3d
+
+[project]
+title = GGJ-2023
+custom_resources = assets/sound/
+dependencies#0 = https://github.com/dapetcu21/defold-fmod/archive/v2.6.1.zip
+
+[physics]
+type = 3D
+
+[osx]
+bundle_identifier = com.defold.example.basic3d
+
+[ios]
+bundle_identifier = com.defold.example.basic3d
+
+[fmod]
+lib_path = /fmod-libs
+live_update = 1
+
+
