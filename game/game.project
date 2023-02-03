@@ -28,7 +28,7 @@ bundle_identifier = com.defold.example.basic3d
 bundle_identifier = com.defold.example.basic3d
 
 [fmod]
-lib_path = /fmod-libs
+lib_path = ../fmod/libs
 live_update = 1
 
 
