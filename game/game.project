@@ -28,6 +28,10 @@ bundle_identifier = com.defold.example.basic3d
 bundle_identifier = com.defold.example.basic3d
 
 [fmod]
+speaker_mode = stereo
 lib_path = ../fmod/libs
 live_update = 1
+
+[html5]
+heap_size = 512
 
