@@ -1,6 +1,6 @@
 [bootstrap]
-main_collection = /main/main.collectionc
-render = /main/main.renderc
+main_collection = /collections/main/main.collectionc
+render = /collections/main/main.renderc
 
 [script]
 shared_state = 1
@@ -30,5 +30,4 @@ bundle_identifier = com.defold.example.basic3d
 [fmod]
 lib_path = ../fmod/libs
 live_update = 1
-
 
