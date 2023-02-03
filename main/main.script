@@ -18,7 +18,45 @@ function init(self)
 	model.set_constant("#quad", "light", self.light)
 	model.set_constant("#sphere", "light", self.light)
 
+	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Master.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
 	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Music.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Vehicles.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+
+	local event_description = fmod.studio.system:get_event("event:/Vehicles/Basic Engine")
+	local event = event_description:create_instance()
+	self.event = event
+
+	-- Error handling example
+	local ok, err = pcall(function ()
+		fmod.studio.system:get_event("event:/Inexistent event")
+	end)
+	if not ok then
+		print(err)
+		local code = fmod.error_code[err] -- The FMOD error code (a number).
+		print(code)
+		if code == fmod.ERR_EVENT_NOTFOUND then
+			print("Ooops! This event doesn't exist!")
+		end
+	end
+
+	local listener_attr = fmod._3D_ATTRIBUTES()
+	self.listener_attr = listener_attr
+	listener_attr.position = go.get_world_position("listener") * world_scale
+	listener_attr.velocity = vmath.vector3(0.0)
+	listener_attr.forward = vmath.vector3(0.0, 1.0, 0.0)
+	listener_attr.up = vmath.vector3(0.0, 0.0, -1.0)
+	fmod.studio.system:set_listener_attributes(0, listener_attr)
+
+	local source_attr = fmod._3D_ATTRIBUTES()
+	self.source_attr = source_attr
+	source_attr.position = go.get_world_position("source") * world_scale
+	source_attr.velocity = vmath.vector3(0.0)
+	source_attr.forward = vmath.vector3(0.0, 1.0, 0.0)
+	source_attr.up = vmath.vector3(0.0, 0.0, -1.0)
+	event:set_3d_attributes(source_attr)
+
+	event:set_parameter_by_name("RPM", 650.0, false)
+	event:start()
 end
 
 function on_input(self, action_id, action)
