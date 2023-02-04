@@ -2,6 +2,7 @@ require "modules.constants"
 local entities = require "modules.entities"
 
 local speed = 5
+local within_range = {}
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
@@ -34,7 +35,33 @@ end
 
 function on_message(self, message_id, message, sender)
 	if message_id == PUNCH then
+		-- todo: add parry
 		-- take some damage
+		self.energy = self.energy - message.damage
+		if self.energy <= 0 then
+			self.energy = 0
+			print("died")
+			-- todo: death screen
+		end
+	elseif message_id == DIED then
+		-- enemy died, cannot be attacked anymore
+		for k,v in pairs(within_range) do
+			if v == hash(sender.path) then
+				table.remove(within_range, k)
+				break
+			end
+		end
+	elseif message_id == hash("trigger_response") then
+		if message.enter then
+			table.insert(within_range, message.other_id)
+		else
+			for k,v in pairs(within_range) do
+				if v == message.other_id then
+					table.remove(within_range, k)
+					break
+				end
+			end
+		end 
 	end
 end
 
@@ -43,11 +70,21 @@ function on_input(self, action_id, action)
 		self.input.x = -1
 	elseif action_id == RIGHT then
 		self.input.x = 1
-	end
-
-	if action_id == UP then
+	elseif action_id == UP then
 		self.input.z = -1
 	elseif action_id == DOWN then
 		self.input.z = 1
+	elseif action_id == LIGHT and action.pressed then
+		-- TODO: timing + energy penalty
+		for k,v in ipairs(within_range) do
+			msg.post(v, PUNCH, { damage = PLAYER_LIGHT_DAMAGE })
+		end
+		print("player light")
+	elseif action_id == HEAVY and action.pressed then
+		-- TODO: timing + energy penalty
+		for k,v in ipairs(within_range) do
+			msg.post(v, PUNCH, { damage = PLAYER_HEAVY_DAMAGE })
+		end
+		print("player heavy")
 	end
 end

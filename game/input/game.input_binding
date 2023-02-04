@@ -30,7 +30,23 @@ key_trigger {
   input: KEY_DOWN
   action: "down"
 }
+key_trigger {
+  input: KEY_Z
+  action: "light"
+}
+key_trigger {
+  input: KEY_X
+  action: "heavy"
+}
 mouse_trigger {
   input: MOUSE_BUTTON_1
   action: "touch"
+}
+mouse_trigger {
+  input: MOUSE_BUTTON_LEFT
+  action: "light"
+}
+mouse_trigger {
+  input: MOUSE_BUTTON_RIGHT
+  action: "right"
 }

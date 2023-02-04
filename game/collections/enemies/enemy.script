@@ -63,10 +63,12 @@ function on_message(self, message_id, message, sender)
 		-- todo: the enemy may block the punch
 		-- todo: play dying animation first or smth
 		-- todo: on low health switch to distance stance
-		local damage = message
-		self.health = self.health - damage
+		print("enemy damaged")
+		self.health = self.health - message.damage
 		if self.health <= 0 then
-			msg.post(self.controller, "died")
+			print("enemy died")
+			msg.post(self.controller, DIED)
+			msg.post(entities.get("player"), DIED)
 			go.delete()
 		end
 	elseif message_id == SET_STANCE then

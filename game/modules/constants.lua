@@ -3,12 +3,18 @@ LEFT = hash("left")
 RIGHT = hash("right")
 UP = hash("up")
 DOWN = hash("down")
+LIGHT = hash("light")
+HEAVY = hash("heavy")
 
 -- messages
 PUNCH = hash("punch")
 CAN_ATTACK = hash("can_attack")
 DIED = hash("died")
 SET_STANCE = hash("set_stance")
+
+-- player constants
+PLAYER_LIGHT_DAMAGE = 10
+PLAYER_HEAVY_DAMAGE = 30
 
 -- enemy constants
 ENEMY_ATTACK_RANGE = 2
