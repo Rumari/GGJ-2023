@@ -2,8 +2,8 @@ local M = {}
 
 local entities = {}
 
-function M.register(name, url) 
-	entities[name] = url
+function M.register(name) 
+	entities[name] = msg.url()
 end
 
 function M.get(name)

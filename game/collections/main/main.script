@@ -1,14 +1,18 @@
-function init(self)
-	math.randomseed(os.time())
+local bruh = require "modules.bruh"
 
+function init(self)
 	msg.post("camera", "acquire_camera_focus")
 
-	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Master.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
-	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Master.strings.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
-	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Music.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
-	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Vehicles.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
-	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/SFX.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
-
+	if not bruh.has_loaded then 
+		math.randomseed(os.time())
+		fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Master.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+		fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Master.strings.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+		fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Music.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+		fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Vehicles.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+		fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/SFX.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
+		bruh.has_loaded = true
+	end
+	
 	local event_description = fmod.studio.system:get_event("event:/Ambience/City")
 	local event = event_description:create_instance()
 	self.event = event

@@ -17,7 +17,7 @@ function init(self)
 	listener_attr.up = vmath.vector3(0.0, 0.0, -1.0)
 	fmod.studio.system:set_listener_attributes(0, listener_attr)
 
-	entities.register("player", msg.url())
+	entities.register("player")
 end
 
 function update(self, dt)

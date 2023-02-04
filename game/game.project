@@ -1,5 +1,5 @@
 [bootstrap]
-main_collection = /collections/main/main.collectionc
+main_collection = /collections/start/start.collectionc
 render = /collections/main/main.renderc
 
 [script]
