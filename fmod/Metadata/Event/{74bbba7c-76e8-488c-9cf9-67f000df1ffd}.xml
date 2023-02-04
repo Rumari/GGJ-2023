@@ -19,7 +19,7 @@ https://www.fmod.com/docs/studio/authoring-events.html#trigger-conditions
 https://www.fmod.com/docs/studio/working-with-instruments.html#delay-and-quantization</value>
 		</property>
 		<property name="name">
-			<value>Level 01</value>
+			<value>REF 1</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>
