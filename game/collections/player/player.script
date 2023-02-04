@@ -8,6 +8,7 @@ function init(self)
 	msg.post(".", "acquire_input_focus")
 	msg.post("camera", "acquire_camera_focus")
 	self.input = vmath.vector3()
+	self.body = msg.url("body")
 
 	local listener_attr = fmod._3D_ATTRIBUTES()
 	self.listener_attr = listener_attr
@@ -24,10 +25,10 @@ function update(self, dt)
 		move = vmath.normalize(self.input)
 	end
 
-	local pos = go.get_position()
+	local pos = go.get_position(self.body)
 	print(move)
 	pos = pos + move * dt * speed
-	go.set_position(pos)
+	go.set_position(pos, self.body)
 
 	self.input = vmath.vector3()
 end
