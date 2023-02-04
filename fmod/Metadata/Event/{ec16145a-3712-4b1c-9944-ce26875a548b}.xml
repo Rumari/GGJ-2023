@@ -14,7 +14,7 @@ There is only one single instrument that the playback position loops within spec
 
 When transitioning, this event makes use of the transition timeline - a special timeline that exists between transition markers or transition regions and their associated named loop regions. These transition timelines are useful for smoothly transitioning from one point in the track to the other. You can double-click on a transition marker or transition region to open a transition timeline. You can also play the event with "Follow Playback Position" enabled to see the transition timeline in action.
 
-In each transition timeline, the source region is crossfaded with the destination region. These crossfades, along with the single instruments on the Transition track, helps to smoothly transition from one state to another.
+In each transition timeline, the source region is crossfaded with the destination region. These crossfades, along with the single instruments on the Transition track, helps to smoothly transition from one state to another.  
 
 On the "Stinger" parameter sheet is a multi instrument that triggers each time the parameter value is set to 0.5 or higher. There is a compressor on the "Music" track which follows the envelope of the signal from the "Stingers" track. When the multi instrument triggers and plays audio, it compresses the volume on the "Music" track. 
 
