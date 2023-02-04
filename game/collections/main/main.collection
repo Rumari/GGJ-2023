@@ -19,12 +19,12 @@ instances {
     z: 1.0
   }
 }
-instances {
-  id: "enemy"
-  prototype: "/collections/enemies/enemy.go"
+collection_instances {
+  id: "player"
+  collection: "/collections/player/player.collection"
   position {
-    x: -3.0
-    y: 0.5
+    x: 0.0
+    y: 0.0
     z: 0.0
   }
   rotation {
@@ -40,8 +40,8 @@ instances {
   }
 }
 collection_instances {
-  id: "player"
-  collection: "/collections/player/player.collection"
+  id: "enemies"
+  collection: "/collections/enemies/enemies.collection"
   position {
     x: 0.0
     y: 0.0
@@ -52,6 +52,17 @@ collection_instances {
     y: 0.0
     z: 0.0
     w: 1.0
+  }
+  instance_properties {
+    id: "controller"
+    properties {
+      id: "controller"
+      properties {
+        id: "player"
+        value: "/player/player"
+        type: PROPERTY_TYPE_URL
+      }
+    }
   }
   scale3 {
     x: 1.0

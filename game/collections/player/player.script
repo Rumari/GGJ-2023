@@ -7,7 +7,6 @@ local speed = 5
 function init(self)
 	msg.post(".", "acquire_input_focus")
 	self.input = vmath.vector3()
-	self.body = msg.url("body")
 
 	local listener_attr = fmod._3D_ATTRIBUTES()
 	self.listener_attr = listener_attr
@@ -24,10 +23,9 @@ function update(self, dt)
 		move = vmath.normalize(self.input)
 	end
 
-	local pos = go.get_position(self.body)
-	print(move)
+	local pos = go.get_position()
 	pos = pos + move * dt * speed
-	go.set_position(pos, self.body)
+	go.set_position(pos)
 
 	self.input = vmath.vector3()
 end
