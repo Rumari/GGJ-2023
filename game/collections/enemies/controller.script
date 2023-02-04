@@ -1,10 +1,5 @@
-go.property("player", msg.url())
-
 function init(self)
-	factory.create("#factory", vmath.vector3(5, 0.5, -5), nil, {
-		controller = msg.url(),
-		player = msg.url(self.player),
-	})
+	factory.create("#factory", vmath.vector3(5, 0.5, -5), nil, { controller = msg.url() })
 end
 
 function update(self, dt)

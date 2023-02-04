@@ -1,8 +1,8 @@
 require "modules.constants"
+local entities = require "modules.entities"
 
 go.property("health", 100)
 go.property("controller", msg.url())
-go.property("player", msg.url())
 go.property("move_speed", 3)
 
 local function move(speed, dir, facing, dt)
@@ -19,6 +19,7 @@ function init(self)
 	self.stance = ENEMY_DISTANCE
 	self.random_dir = nil
 	self.random_time = 0.0
+	self.player = entities.get("player")
 end
 
 function update(self, dt)

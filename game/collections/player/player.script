@@ -1,4 +1,5 @@
 require "modules.constants"
+local entities = require "modules.entities"
 
 local speed = 5
 
@@ -14,6 +15,8 @@ function init(self)
 	listener_attr.forward = vmath.vector3(0.0, 1.0, 0.0)
 	listener_attr.up = vmath.vector3(0.0, 0.0, -1.0)
 	fmod.studio.system:set_listener_attributes(0, listener_attr)
+
+	entities.register("player", msg.url())
 end
 
 function update(self, dt)

@@ -53,17 +53,6 @@ collection_instances {
     z: 0.0
     w: 1.0
   }
-  instance_properties {
-    id: "controller"
-    properties {
-      id: "controller"
-      properties {
-        id: "player"
-        value: "/player/player"
-        type: PROPERTY_TYPE_URL
-      }
-    }
-  }
   scale3 {
     x: 1.0
     y: 1.0
