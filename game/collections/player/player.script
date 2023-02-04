@@ -6,7 +6,6 @@ local speed = 5
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	msg.post("camera", "acquire_camera_focus")
 	self.input = vmath.vector3()
 	self.body = msg.url("body")
 

@@ -1,4 +1,6 @@
 function init(self)
+	msg.post("camera", "acquire_camera_focus")
+	
 	-- position directional light
 	self.light = vmath.vector4(0, 0, go.get_position().z + 1, 0)
 	model.set_constant("player/body#model", "light", self.light)
