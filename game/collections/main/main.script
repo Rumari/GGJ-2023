@@ -13,7 +13,7 @@ function init(self)
 		bruh.has_loaded = true
 	end
 	
-	local event_description = fmod.studio.system:get_event("event:/Character/Health")
+	local event_description = fmod.studio.system:get_event("event:/Music/Level")
 	local event = event_description:create_instance()
 	self.event = event
 
@@ -24,6 +24,6 @@ function init(self)
 	source_attr.forward = vmath.vector3(0.0, 1.0, 0.0)
 	source_attr.up = vmath.vector3(0.0, 0.0, -1.0)
 	event:set_3d_attributes(source_attr)
-	event:set_parameter_by_name("Health", 26.0, false)
+	event:set_parameter_by_name("Section", 1, false)
 	event:start()
-end
+end	
