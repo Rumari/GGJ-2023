@@ -5,10 +5,6 @@ render = /collections/main/main.renderc
 [script]
 shared_state = 1
 
-[display]
-width = 960
-height = 640
-
 [android]
 input_method = HiddenInputField
 package = com.defold.example.basic3d
@@ -30,4 +26,8 @@ bundle_identifier = com.defold.example.basic3d
 [fmod]
 lib_path = ../fmod/libs
 live_update = 1
+
+[graphics]
+default_texture_min_filter = nearest
+default_texture_mag_filter = nearest
 

@@ -1,13 +1,4 @@
 function init(self)
-	msg.post(".", "acquire_input_focus")
-	msg.post("@render:", "use_camera_projection")
-	msg.post("player/camera", "acquire_camera_focus")
-
-	-- rotate the cube
-	go.animate(".", "euler.z", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 6)
-	go.animate(".", "euler.x", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 9)
-	go.animate(".", "euler.y", go.PLAYBACK_LOOP_FORWARD, 360, go.EASING_INOUTQUAD, 12)
-
 	-- position directional light
 	self.light = vmath.vector4(0, 0, go.get_position().z + 1, 0)
 	model.set_constant("player/body#model", "light", self.light)
@@ -22,18 +13,9 @@ function init(self)
 	local event = event_description:create_instance()
 	self.event = event
 
-	local world_scale = 1
-	local listener_attr = fmod._3D_ATTRIBUTES()
-	self.listener_attr = listener_attr
-	listener_attr.position = go.get_world_position("player/listener") * world_scale
-	listener_attr.velocity = vmath.vector3(0.0)
-	listener_attr.forward = vmath.vector3(0.0, 1.0, 0.0)
-	listener_attr.up = vmath.vector3(0.0, 0.0, -1.0)
-	fmod.studio.system:set_listener_attributes(0, listener_attr)
-
 	local source_attr = fmod._3D_ATTRIBUTES()
 	self.source_attr = source_attr
-	source_attr.position = go.get_world_position("source") * world_scale
+	source_attr.position = go.get_world_position("source")
 	source_attr.velocity = vmath.vector3(0.0)
 	source_attr.forward = vmath.vector3(0.0, 1.0, 0.0)
 	source_attr.up = vmath.vector3(0.0, 0.0, -1.0)
