@@ -1,5 +1,9 @@
 local bruh = require "modules.bruh"
 
+local function callback(type, event)
+	print("callback fired!")
+end
+
 function init(self)
 	msg.post("camera", "acquire_camera_focus")
 
@@ -25,5 +29,6 @@ function init(self)
 	source_attr.up = vmath.vector3(0.0, 0.0, -1.0)
 	event:set_3d_attributes(source_attr)
 	event:set_parameter_by_name("Section", 1, false)
+	event:set_callback(callback, fmod.FMOD_STUDIO_EVENT_CALLBACK_TIMELINE_MARKER)
 	event:start()
-end	
+end
