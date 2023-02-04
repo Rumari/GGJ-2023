@@ -42,6 +42,8 @@ function on_message(self, message_id, message, sender)
 			self.energy = 0
 			print("died")
 			-- todo: death screen
+		else
+			print("took damage, energy remaining:", self.energy)
 		end
 	elseif message_id == DIED then
 		-- enemy died, cannot be attacked anymore

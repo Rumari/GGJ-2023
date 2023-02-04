@@ -135,7 +135,7 @@ embedded_instances {
   data: "embedded_components {\n"
   "  id: \"model\"\n"
   "  type: \"model\"\n"
-  "  data: \"mesh: \\\"/builtins/assets/meshes/sphere.dae\\\"\\n"
+  "  data: \"mesh: \\\"/assets/models/player.dae\\\"\\n"
   "material: \\\"/builtins/materials/model.material\\\"\\n"
   "textures: \\\"/assets/images/green.png\\\"\\n"
   "skeleton: \\\"\\\"\\n"
@@ -158,7 +158,7 @@ embedded_instances {
   ""
   position {
     x: 0.0
-    y: 0.0
+    y: 0.82
     z: 0.0
   }
   rotation {
@@ -168,9 +168,9 @@ embedded_instances {
     w: 1.0
   }
   scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
+    x: 0.4
+    y: 0.4
+    z: 0.4
   }
 }
 embedded_instances {

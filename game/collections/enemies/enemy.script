@@ -14,7 +14,7 @@ local function to_plane(pos3d)
 	-- utility to project coordinates into xz plane
 	return vmath.vector3(pos3d.x, 0.0, pos3d.z)
 end
-	
+
 function init(self)
 	self.stance = ENEMY_DISTANCE
 	self.random_dir = nil
@@ -54,6 +54,7 @@ function update(self, dt)
 			move(self.move_speed, player_dir, player_dir, dt)
 		else
 			-- todo: punch/defend on rhythm
+			
 		end
 	end
 end
