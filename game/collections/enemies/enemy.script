@@ -1,16 +1,9 @@
+require "modules.constants"
+
 go.property("health", 100)
 go.property("controller", msg.url())
 go.property("player", msg.url())
 go.property("move_speed", 3)
-
-ATTACK_RANGE = 2
-DISTANCE_RANGE = 6
-
-DISTANCE = 0
-FIGHT = 1
-
-WANDER_SPEED_MUL = 0.3
-WANDER_DIR_TIME = 1
 
 local function move(speed, dir, facing, dt)
 	-- moves the enemy in the given direction, facing towards another direction.
@@ -23,7 +16,7 @@ local function to_plane(pos3d)
 end
 	
 function init(self)
-	self.stance = DISTANCE
+	self.stance = ENEMY_DISTANCE
 	self.random_dir = nil
 	self.random_time = 0.0
 end
@@ -38,24 +31,24 @@ function update(self, dt)
 	local distance = vmath.length(offset)
 	local player_dir = offset / distance
 	
-	if self.stance == DISTANCE then
-		if distance < ATTACK_RANGE then
+	if self.stance == ENEMY_DISTANCE then
+		if distance < ENEMY_ATTACK_RANGE then
 			msg.post(self.controller, "can_attack")
-		elseif distance < DISTANCE_RANGE then
+		elseif distance < ENEMY_DISTANCE_RANGE then
 			-- flee to safe distance
 			move(self.move_speed, -player_dir, player_dir, dt)
 			self.random_dir = nil -- force wander to pick a new dir
 		else
 			-- if we havent picked a wander dir or too long has passed, pick a new one
-			if self.random_time > WANDER_DIR_TIME or self.random_dir == nil then
+			if self.random_time > ENEMY_WANDER_DIR_TIME or self.random_dir == nil then
 				self.random_time = 0.0
 				self.random_dir = vmath.vector3(math.random(-1, 1), 0, math.random(-1, 1))
 			end
 
-			move(self.move_speed * WANDER_SPEED_MUL, self.random_dir, player_dir, dt)
+			move(self.move_speed * ENEMY_WANDER_SPEED_MUL, self.random_dir, player_dir, dt)
 		end
-	elseif self.stance == FIGHT then
-		if distance > ATTACK_RANGE then
+	elseif self.stance == ENEMY_FIGHT then
+		if distance > ENEMY_ATTACK_RANGE then
 			-- get closer
 			move(self.move_speed, player_dir, player_dir, dt)
 		else
@@ -65,7 +58,7 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	if message_id == hash("punch") then
+	if message_id == PUNCH then
 		-- todo: the enemy may block the punch
 		-- todo: play dying animation first or smth
 		-- todo: on low health switch to distance stance
