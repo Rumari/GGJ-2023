@@ -7,7 +7,7 @@ function init(self)
 	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/Vehicles.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
 	fmod.studio.system:load_bank_memory(resource.load("/assets/sound/Desktop/SFX.bank"), fmod.STUDIO_LOAD_BANK_NORMAL)
 
-	local event_description = fmod.studio.system:get_event("event:/Vehicles/Car Engine")
+	local event_description = fmod.studio.system:get_event("event:/Ambience/City")
 	local event = event_description:create_instance()
 	self.event = event
 
@@ -19,6 +19,7 @@ function init(self)
 	source_attr.up = vmath.vector3(0.0, 0.0, -1.0)
 	event:set_3d_attributes(source_attr)
 
-	event:set_parameter_by_name("RPM", 650.0, false)
+	event:set_parameter_by_name("Traffic", 0.2, false)
+	event:set_parameter_by_name("Walla", 0.2, false)
 	event:start()
 end
