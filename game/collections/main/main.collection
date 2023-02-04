@@ -175,7 +175,7 @@ embedded_instances {
   "  shapes {\\n"
   "    shape_type: TYPE_BOX\\n"
   "    position {\\n"
-  "      x: -5.5\\n"
+  "      x: -6.5\\n"
   "      y: 0.0\\n"
   "      z: 0.0\\n"
   "    }\\n"
@@ -207,7 +207,7 @@ embedded_instances {
   "  shapes {\\n"
   "    shape_type: TYPE_BOX\\n"
   "    position {\\n"
-  "      x: 5.5\\n"
+  "      x: 6.5\\n"
   "      y: 0.0\\n"
   "      z: 0.0\\n"
   "    }\\n"
@@ -236,16 +236,16 @@ embedded_instances {
   "    index: 9\\n"
   "    count: 3\\n"
   "  }\\n"
-  "  data: 0.5\\n"
+  "  data: 0.7655\\n"
   "  data: 5.0\\n"
   "  data: 6.0\\n"
-  "  data: 5.0\\n"
-  "  data: 5.0\\n"
-  "  data: 0.5\\n"
-  "  data: 0.5\\n"
+  "  data: 7.4045\\n"
+  "  data: 7.4045\\n"
+  "  data: 0.7405\\n"
+  "  data: 0.7785\\n"
   "  data: 5.0\\n"
   "  data: 6.0\\n"
-  "  data: 5.0\\n"
+  "  data: 7.2895\\n"
   "  data: 5.0\\n"
   "  data: 0.5\\n"
   "}\\n"
@@ -320,13 +320,13 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "wall"
+  id: "wall_teste"
   data: "embedded_components {\n"
   "  id: \"model\"\n"
   "  type: \"model\"\n"
-  "  data: \"mesh: \\\"/assets/models/wall_model.dae\\\"\\n"
+  "  data: \"mesh: \\\"/assets/models/wall_bigger.dae\\\"\\n"
   "material: \\\"/builtins/materials/model.material\\\"\\n"
-  "textures: \\\"/assets/images/wall_texture1_2.png\\\"\\n"
+  "textures: \\\"/assets/images/wall_template_max2.png\\\"\\n"
   "skeleton: \\\"\\\"\\n"
   "animations: \\\"\\\"\\n"
   "default_animation: \\\"\\\"\\n"
@@ -346,9 +346,9 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 0.0
-    y: 1.0
-    z: -5.0
+    x: 6.0
+    y: 0.0
+    z: -3.0
   }
   rotation {
     x: 0.0
@@ -363,13 +363,99 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "wall1"
+  id: "wall_teste1"
   data: "embedded_components {\n"
   "  id: \"model\"\n"
   "  type: \"model\"\n"
-  "  data: \"mesh: \\\"/assets/models/wall_model.dae\\\"\\n"
+  "  data: \"mesh: \\\"/assets/models/wall_bigger.dae\\\"\\n"
   "material: \\\"/builtins/materials/model.material\\\"\\n"
-  "textures: \\\"/assets/images/wall_texture2_2.png\\\"\\n"
+  "textures: \\\"/assets/images/wall_template_max3_1.png\\\"\\n"
+  "skeleton: \\\"\\\"\\n"
+  "animations: \\\"\\\"\\n"
+  "default_animation: \\\"\\\"\\n"
+  "name: \\\"unnamed\\\"\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 6.0
+    y: 0.0
+    z: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 1.0
+    z: 0.0
+    w: 6.123234E-17
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "wall_teste2"
+  data: "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/assets/models/wall_bigger.dae\\\"\\n"
+  "material: \\\"/builtins/materials/model.material\\\"\\n"
+  "textures: \\\"/assets/images/wall_template_max2.png\\\"\\n"
+  "skeleton: \\\"\\\"\\n"
+  "animations: \\\"\\\"\\n"
+  "default_animation: \\\"\\\"\\n"
+  "name: \\\"unnamed\\\"\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 6.0
+    y: 0.0
+    z: 5.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "wall_teste3"
+  data: "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/assets/models/wall_bigger.dae\\\"\\n"
+  "material: \\\"/builtins/materials/model.material\\\"\\n"
+  "textures: \\\"/assets/images/wall_template_max3_1.png\\\"\\n"
   "skeleton: \\\"\\\"\\n"
   "animations: \\\"\\\"\\n"
   "default_animation: \\\"\\\"\\n"
@@ -390,94 +476,8 @@ embedded_instances {
   ""
   position {
     x: 4.0
-    y: 1.0
-    z: -5.0
-  }
-  rotation {
-    x: 0.0
     y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-embedded_instances {
-  id: "wall2"
-  data: "embedded_components {\n"
-  "  id: \"model\"\n"
-  "  type: \"model\"\n"
-  "  data: \"mesh: \\\"/assets/models/wall_model.dae\\\"\\n"
-  "material: \\\"/builtins/materials/model.material\\\"\\n"
-  "textures: \\\"/assets/images/wall_texture2_2.png\\\"\\n"
-  "skeleton: \\\"\\\"\\n"
-  "animations: \\\"\\\"\\n"
-  "default_animation: \\\"\\\"\\n"
-  "name: \\\"unnamed\\\"\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  ""
-  position {
-    x: 6.0
-    y: 1.0
-    z: -3.0
-  }
-  rotation {
-    x: 0.0
-    y: -0.70710677
-    z: 0.0
-    w: 0.70710677
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-embedded_instances {
-  id: "wall3"
-  data: "embedded_components {\n"
-  "  id: \"model\"\n"
-  "  type: \"model\"\n"
-  "  data: \"mesh: \\\"/assets/models/wall_model.dae\\\"\\n"
-  "material: \\\"/builtins/materials/model.material\\\"\\n"
-  "textures: \\\"/assets/images/wall_texture2_2.png\\\"\\n"
-  "skeleton: \\\"\\\"\\n"
-  "animations: \\\"\\\"\\n"
-  "default_animation: \\\"\\\"\\n"
-  "name: \\\"unnamed\\\"\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  ""
-  position {
-    x: 6.0
-    y: 1.0
-    z: 1.0
+    z: -5.0
   }
   rotation {
     x: 0.0
@@ -492,13 +492,13 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "wall4"
+  id: "wall_teste4"
   data: "embedded_components {\n"
   "  id: \"model\"\n"
   "  type: \"model\"\n"
-  "  data: \"mesh: \\\"/assets/models/wall_model.dae\\\"\\n"
+  "  data: \"mesh: \\\"/assets/models/wall_bigger.dae\\\"\\n"
   "material: \\\"/builtins/materials/model.material\\\"\\n"
-  "textures: \\\"/assets/images/wall_texture2_2.png\\\"\\n"
+  "textures: \\\"/assets/images/wall_template_max.png\\\"\\n"
   "skeleton: \\\"\\\"\\n"
   "animations: \\\"\\\"\\n"
   "default_animation: \\\"\\\"\\n"
@@ -518,13 +518,13 @@ embedded_instances {
   "}\n"
   ""
   position {
-    x: 6.0
-    y: 1.0
-    z: 5.0
+    x: 0.0
+    y: 0.0
+    z: -5.0
   }
   rotation {
     x: 0.0
-    y: -0.70710677
+    y: 0.70710677
     z: 0.0
     w: 0.70710677
   }
@@ -535,13 +535,13 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "wall5"
+  id: "wall_teste5"
   data: "embedded_components {\n"
   "  id: \"model\"\n"
   "  type: \"model\"\n"
-  "  data: \"mesh: \\\"/assets/models/wall_model.dae\\\"\\n"
+  "  data: \"mesh: \\\"/assets/models/wall_bigger.dae\\\"\\n"
   "material: \\\"/builtins/materials/model.material\\\"\\n"
-  "textures: \\\"/assets/images/wall_texture2_2.png\\\"\\n"
+  "textures: \\\"/assets/images/wall_template_max.png\\\"\\n"
   "skeleton: \\\"\\\"\\n"
   "animations: \\\"\\\"\\n"
   "default_animation: \\\"\\\"\\n"
@@ -562,8 +562,51 @@ embedded_instances {
   ""
   position {
     x: -4.0
-    y: 1.0
+    y: 0.0
     z: -5.0
+  }
+  rotation {
+    x: 0.0
+    y: -0.70710677
+    z: 0.0
+    w: 0.70710677
+  }
+  scale3 {
+    x: 1.0
+    y: 1.0
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "wall_teste6"
+  data: "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/assets/models/wall_bigger.dae\\\"\\n"
+  "material: \\\"/builtins/materials/model.material\\\"\\n"
+  "textures: \\\"/assets/images/wall_template_max2.png\\\"\\n"
+  "skeleton: \\\"\\\"\\n"
+  "animations: \\\"\\\"\\n"
+  "default_animation: \\\"\\\"\\n"
+  "name: \\\"unnamed\\\"\\n"
+  "\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: -6.0
+    y: 0.0
+    z: -3.0
   }
   rotation {
     x: 0.0
@@ -578,13 +621,13 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "wall6"
+  id: "wall_teste7"
   data: "embedded_components {\n"
   "  id: \"model\"\n"
   "  type: \"model\"\n"
-  "  data: \"mesh: \\\"/assets/models/wall_model.dae\\\"\\n"
+  "  data: \"mesh: \\\"/assets/models/wall_bigger.dae\\\"\\n"
   "material: \\\"/builtins/materials/model.material\\\"\\n"
-  "textures: \\\"/assets/images/wall_texture1_2.png\\\"\\n"
+  "textures: \\\"/assets/images/wall_template_max2.png\\\"\\n"
   "skeleton: \\\"\\\"\\n"
   "animations: \\\"\\\"\\n"
   "default_animation: \\\"\\\"\\n"
@@ -605,14 +648,14 @@ embedded_instances {
   ""
   position {
     x: -6.0
-    y: 1.0
-    z: -3.0
+    y: 0.0
+    z: 1.0
   }
   rotation {
     x: 0.0
-    y: -0.70710677
+    y: 0.0
     z: 0.0
-    w: 0.70710677
+    w: 1.0
   }
   scale3 {
     x: 1.0
@@ -621,13 +664,13 @@ embedded_instances {
   }
 }
 embedded_instances {
-  id: "wall7"
+  id: "wall_teste8"
   data: "embedded_components {\n"
   "  id: \"model\"\n"
   "  type: \"model\"\n"
-  "  data: \"mesh: \\\"/assets/models/wall_model.dae\\\"\\n"
+  "  data: \"mesh: \\\"/assets/models/wall_bigger.dae\\\"\\n"
   "material: \\\"/builtins/materials/model.material\\\"\\n"
-  "textures: \\\"/assets/images/wall_texture2_2.png\\\"\\n"
+  "textures: \\\"/assets/images/wall_template_max2.png\\\"\\n"
   "skeleton: \\\"\\\"\\n"
   "animations: \\\"\\\"\\n"
   "default_animation: \\\"\\\"\\n"
@@ -648,57 +691,14 @@ embedded_instances {
   ""
   position {
     x: -6.0
-    y: 1.0
-    z: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.70710677
-    z: 0.0
-    w: 0.70710677
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-embedded_instances {
-  id: "wall8"
-  data: "embedded_components {\n"
-  "  id: \"model\"\n"
-  "  type: \"model\"\n"
-  "  data: \"mesh: \\\"/assets/models/wall_model.dae\\\"\\n"
-  "material: \\\"/builtins/materials/model.material\\\"\\n"
-  "textures: \\\"/assets/images/wall_texture2_2.png\\\"\\n"
-  "skeleton: \\\"\\\"\\n"
-  "animations: \\\"\\\"\\n"
-  "default_animation: \\\"\\\"\\n"
-  "name: \\\"unnamed\\\"\\n"
-  "\"\n"
-  "  position {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "  }\n"
-  "  rotation {\n"
-  "    x: 0.0\n"
-  "    y: 0.0\n"
-  "    z: 0.0\n"
-  "    w: 1.0\n"
-  "  }\n"
-  "}\n"
-  ""
-  position {
-    x: -6.0
-    y: 1.0
+    y: 0.0
     z: 5.0
   }
   rotation {
     x: 0.0
-    y: -0.70710677
+    y: 0.0
     z: 0.0
-    w: 0.70710677
+    w: 1.0
   }
   scale3 {
     x: 1.0
