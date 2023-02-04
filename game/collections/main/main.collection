@@ -168,3 +168,38 @@ embedded_instances {
     z: 1.0
   }
 }
+embedded_instances {
+  id: "ground"
+  data: "components {\n"
+  "  id: \"tilemap\"\n"
+  "  component: \"/collections/main/tilemap.tilemap\"\n"
+  "  position {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "  }\n"
+  "  rotation {\n"
+  "    x: 0.0\n"
+  "    y: 0.0\n"
+  "    z: 0.0\n"
+  "    w: 1.0\n"
+  "  }\n"
+  "}\n"
+  ""
+  position {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+  }
+  rotation {
+    x: -0.70710677
+    y: 0.0
+    z: 0.0
+    w: 0.70710677
+  }
+  scale3 {
+    x: 0.05
+    y: 0.05
+    z: 1.0
+  }
+}
