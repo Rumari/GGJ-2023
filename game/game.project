@@ -16,6 +16,7 @@ dependencies#0 = https://github.com/dapetcu21/defold-fmod/archive/v2.6.1.zip
 
 [physics]
 type = 3D
+gravity_y = 0.0
 
 [osx]
 bundle_identifier = com.defold.example.basic3d

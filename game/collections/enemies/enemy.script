@@ -2,8 +2,6 @@ go.property("health", 100)
 go.property("controller", msg.url())
 go.property("player", msg.url())
 go.property("move_speed", 3)
-go.property("bounds_min", vmath.vector3(-5, 0, -5))
-go.property("bounds_max", vmath.vector3(5, 0, 0))
 
 ATTACK_RANGE = 2
 DISTANCE_RANGE = 6
@@ -14,27 +12,9 @@ FIGHT = 1
 WANDER_SPEED_MUL = 0.3
 WANDER_DIR_TIME = 1
 
-local function clamp_to_bounds(pos, bounds)
-	if pos.x < bounds.min.x then
-		pos.x = bounds.min.x
-	elseif pos.x > bounds.max.x then
-		pos.x = bounds.max.x
-	end
-
-	if pos.z < bounds.min.z then
-		pos.z = bounds.min.z
-	elseif pos.z > bounds.max.z then
-		pos.z = bounds.max.z
-	end
-end
-
-local function move(self, speed, dir, facing, dt)
+local function move(speed, dir, facing, dt)
 	-- moves the enemy in the given direction, facing towards another direction.
-	local pos = go.get_position() + dir * speed * dt
-
-	-- make sure it stays inside the bounds
-	clamp_to_bounds(pos, { min = self.bounds_min, max = self.bounds_max })
-	go.set_position(pos)
+	go.set_position(go.get_position() + dir * speed * dt)
 end
 
 local function to_plane(pos3d)
@@ -49,32 +29,38 @@ function init(self)
 end
 
 function update(self, dt)
+	-- inc wander dir timer
 	self.random_time = self.random_time + dt
+
+	local player_pos = to_plane(go.get_position(self.player))
+	local pos = to_plane(go.get_position())
+	local offset = player_pos - pos
+	local distance = vmath.length(offset)
+	local player_dir = offset / distance
 	
 	if self.stance == DISTANCE then
-		local player_pos = to_plane(go.get_position(self.player))
-		local pos = to_plane(go.get_position())
-		local offset = player_pos - pos
-		local distance = vmath.length(offset)
-		local player_dir = offset / distance
-
 		if distance < ATTACK_RANGE then
 			msg.post(self.controller, "can_attack")
 		elseif distance < DISTANCE_RANGE then
 			-- flee to safe distance
-			move(self, self.move_speed, -player_dir, player_dir, dt)
+			move(self.move_speed, -player_dir, player_dir, dt)
 			self.random_dir = nil -- force wander to pick a new dir
 		else
+			-- if we havent picked a wander dir or too long has passed, pick a new one
 			if self.random_time > WANDER_DIR_TIME or self.random_dir == nil then
 				self.random_time = 0.0
 				self.random_dir = vmath.vector3(math.random(-1, 1), 0, math.random(-1, 1))
 			end
 
-			move(self, self.move_speed * WANDER_SPEED_MUL, self.random_dir, player_dir, dt)
+			move(self.move_speed * WANDER_SPEED_MUL, self.random_dir, player_dir, dt)
 		end
 	elseif self.stance == FIGHT then
-		-- todo: move within attack range
-		-- todo: if within attack range, punch/defend on rhythm
+		if distance > ATTACK_RANGE then
+			-- get closer
+			move(self.move_speed, player_dir, player_dir, dt)
+		else
+			-- todo: punch/defend on rhythm
+		end
 	end
 end
 
