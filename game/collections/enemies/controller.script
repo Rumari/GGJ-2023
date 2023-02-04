@@ -35,7 +35,12 @@ function on_message(self, message_id, message, sender)
 		set_all_stances(ENEMY_DISTANCE)
 		set_stance(sender, ENEMY_FIGHT)
 	elseif message_id == DIED then
-		table.remove(table, sender)
+		for k,v in pairs(enemies) do
+			if v == hash(sender.path) then
+				table.remove(enemies, k)
+				break
+			end
+		end
 		self.enemy_count = self.enemy_count - 1
 	end
 end
