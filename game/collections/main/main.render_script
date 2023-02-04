@@ -1,5 +1,5 @@
 -- higher values -> less pixelated
-DESIRED_WIDTH = 480
+DESIRED_WIDTH = 256
 
 local function create_render_targets(self, width, height)
     local scale = width / DESIRED_WIDTH
