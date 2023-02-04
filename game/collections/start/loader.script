@@ -3,6 +3,7 @@ local entities = require "modules.entities"
 local PROXY_LOADED = hash("proxy_loaded")
 local LOAD_MAIN = hash("load_main")
 local LOAD_MENU = hash("load_menu")
+local LOAD_LORE = hash("load_lore")
 
 function init(self)
 	self.current = "menu"
@@ -15,8 +16,8 @@ function on_message(self, message_id, message, sender)
 		msg.post(sender, "init")
 		msg.post(sender, "enable")
 	elseif message_id == LOAD_MAIN then
-		if self.current == "menu" then
-			msg.post("menu#menu", "disable")
+		if self.current == "lore" then
+			msg.post("lore#lore", "disable")
 			self.current = "main"
 			msg.post("main#main", "load")
 		end
@@ -25,6 +26,12 @@ function on_message(self, message_id, message, sender)
 			msg.post("main#main", "unload")
 			msg.post("menu#menu", "enable")
 			self.current = "menu"
+		end
+	elseif message_id == LOAD_LORE then
+		if self.current == "menu" then
+			msg.post("menu#menu", "disable")
+			msg.post("lore#lore", "load")
+			self.current = "lore"
 		end
 	end
 end
