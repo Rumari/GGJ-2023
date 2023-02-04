@@ -1,0 +1,13 @@
+local entities = require "modules.entities"
+
+function init(self)
+	self.loader = entities.get("loader")
+	msg.post(".", "acquire_input_focus")
+end
+
+
+function on_input(self, action_id, action)
+	if action_id == hash("enter") then
+		msg.post(self.loader, "load_main")
+	end
+end
