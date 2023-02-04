@@ -150,6 +150,7 @@ https://commons.wikimedia.org/wiki/File:Heartbeat.ogg</value>
 		<property name="length">
 			<value>25.000001907348633</value>
 		</property>
+		<property name="name" />
 		<property name="looping">
 			<value>true</value>
 		</property>
