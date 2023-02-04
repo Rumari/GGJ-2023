@@ -1,5 +1,28 @@
+require "modules.constants"
+
+go.property("enemy_count", 5)
+
+local enemies = {}
+
+-- sets the stance of an enemy
+local function set_stance(enemy, stance)
+	msg.post(enemy, SET_STANCE, { stance = stance })
+end
+
+-- sets the stances of all enemies to ENEMY_DISTANCE
+local function set_all_stances(stance)
+	for k,enemy in ipairs(enemies) do
+		set_stance(enemy, stance)
+	end
+end
+
 function init(self)
-	factory.create("#factory", vmath.vector3(5, 0.5, -5), nil, { controller = msg.url() })
+	for i=1,self.enemy_count do
+		local enemy = factory.create("#factory", vmath.vector3(0, 0.5, 0), nil, { controller = msg.url() })
+		table.insert(enemies, enemy)
+	end
+
+	-- pick an enemy and set it to attack stance
 end
 
 function update(self, dt)
@@ -7,5 +30,12 @@ function update(self, dt)
 end
 
 function on_message(self, message_id, message, sender)
-	
+	if message_id == CAN_ATTACK then
+		-- todo: make this smarter?
+		set_all_stances(ENEMY_DISTANCE)
+		set_stance(sender, ENEMY_FIGHT)
+	elseif message_id == DIED then
+		table.remove(table, sender)
+		self.enemy_count = self.enemy_count - 1
+	end
 end

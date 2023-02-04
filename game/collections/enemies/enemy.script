@@ -34,7 +34,7 @@ function update(self, dt)
 	
 	if self.stance == ENEMY_DISTANCE then
 		if distance < ENEMY_ATTACK_RANGE then
-			msg.post(self.controller, "can_attack")
+			msg.post(self.controller, CAN_ATTACK)
 		elseif distance < ENEMY_DISTANCE_RANGE then
 			-- flee to safe distance
 			move(self.move_speed, -player_dir, player_dir, dt)
@@ -69,9 +69,7 @@ function on_message(self, message_id, message, sender)
 			msg.post(self.controller, "died")
 			go.delete()
 		end
-	elseif message_id == hash("distance") then
-		self.stance = DISTANCE
-	elseif message_id == hash("fight") then
-		self.stance = FIGHT
+	elseif message_id == SET_STANCE then
+		self.stance = message.stance
 	end
 end
