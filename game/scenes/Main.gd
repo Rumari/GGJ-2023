@@ -14,9 +14,12 @@ func _ready():
 func _process(delta):
 	var brightness = $"Level 1".optimality
 	$Camera.environment.ambient_light_energy = brightness
+	var shake_offset = $"Level 1".optimality
+	$Camera.v_offset = shake_offset * rand_range(0, 0.1)
+	$Camera.h_offset = shake_offset * rand_range(0, 0.1)
 
 
 func _on_Level_1_hit():
 	var shake_offset = $"Level 1".optimality
-	$Camera.v_offset = shake_offset * rand_range(0, 0.5)
-	$Camera.h_offset = shake_offset * rand_range(0, 0.5)
+	$Camera.v_offset = shake_offset * rand_range(0, 0.1)
+	$Camera.h_offset = shake_offset * rand_range(0, 0.1)
