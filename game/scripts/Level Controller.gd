@@ -3,8 +3,8 @@ extends Spatial
 export(NodePath) var music
 export var optimality = 0.0
 
-const BEAT_START = 9
-const BEAT_PERIOD = 4
+const BEAT_START = 17
+const BEAT_PERIOD = 1
 
 var time_between_beats
 var last_beat
@@ -24,7 +24,7 @@ func on_beat(i):
 	
 	print("beat %d" % i)	
 	if i >= BEAT_START and (i - BEAT_START) % BEAT_PERIOD == 0:
-		$BeatAnimator.playback_speed = 5.0 / (time_between_beats * BEAT_PERIOD)
+		$BeatAnimator.playback_speed = 1.0 / (time_between_beats * BEAT_PERIOD)
 		$BeatAnimator.play("Beat")
 		print("attack on beat %d" % i)
 		$"Enemy Controller".emit_signal("attack")

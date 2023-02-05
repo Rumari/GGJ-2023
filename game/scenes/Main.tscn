@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://shaders/Pixels.tres" type="Shader" id=1]
 [ext_resource path="res://scenes/Level 1.tscn" type="PackedScene" id=2]
@@ -12,9 +12,13 @@
 [ext_resource path="res://assets/images/bar.png" type="Texture" id=10]
 [ext_resource path="res://assets/images/bar_juice1.png" type="Texture" id=11]
 [ext_resource path="res://assets/images/bar_under.png" type="Texture" id=12]
+[ext_resource path="res://scenes/Main.gd" type="Script" id=13]
 [ext_resource path="res://scenes/EnergyBar.gd" type="Script" id=17]
 
 [sub_resource type="Environment" id=3]
+ambient_light_color = Color( 0.372549, 0.439216, 0.878431, 1 )
+ambient_light_energy = 0.0
+fog_enabled = true
 
 [sub_resource type="ShaderMaterial" id=4]
 shader = ExtResource( 1 )
@@ -276,6 +280,7 @@ shader_param/vignette_intensity = 0.4
 shader_param/vignette_opacity = 0.5
 
 [node name="Main" type="Spatial"]
+script = ExtResource( 13 )
 
 [node name="Level 1" parent="." instance=ExtResource( 2 )]
 music = NodePath("../MixingDeskMusic")

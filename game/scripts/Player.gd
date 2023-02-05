@@ -92,7 +92,7 @@ func lose_energy(amount):
 	if energy <= 0.0:
 		energy = 0.0
 		$AnimationTree["parameters/playback"].travel("Chicken Dance")
-		$Timer.start(4)
+		$Timer.start(1)
 		return false
 	else:
 		return true
