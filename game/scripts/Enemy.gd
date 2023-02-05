@@ -22,11 +22,11 @@ export var stance = "distance"
 export(NodePath) var player
 
 const DAMAGE_DELAY = 0.3
-const LIGHT_DAMAGE = 40
+const LIGHT_DAMAGE = 10
 const ATTACK_RANGE = 3.5
 const DISTANCE_RANGE = 6
 const RANDOM_DIR_TIME = 0.5
-const ATTACK_CHANCE = 0.75
+const ATTACK_CHANCE = 0.2
 
 func _ready():
 	player = get_node(player)
@@ -137,6 +137,7 @@ func hit(damage):
 	if health <= 0.0:
 		health = 0.0
 		emit_signal("died", self)
+		$CollisionShape.disabled = 1
 		$AnimationTree["parameters/Death/active"] = true
 		$AudioStreamPlayer.set_stream(Globals.EnemyDeathFX)
 		$AudioStreamPlayer.play()

@@ -13,8 +13,8 @@ const ENERGY_RECHARGE_SPEED = 5
 const BLOCK_REWARD = 30
 const CHARGE_ENERGY = 30
 const ATTACK_ENERGY = 10
-const LIGHT_DAMAGE = 20
-const HEAVY_DAMAGE = 40
+const LIGHT_DAMAGE = 40
+const HEAVY_DAMAGE = 80
 const MISS_PENALTY = 20
 
 const CHARGE_MIN_TIME = 1.0
@@ -131,6 +131,8 @@ func attack():
 	if optimality == 0.0:
 		spend_energy(MISS_PENALTY)
 		$AnimationTree["parameters/playback"].travel("Miss")
+		$AudioStreamPlayer.set_stream(Globals.MissFX)
+		$AudioStreamPlayer.play()
 		return false
 	else:
 		var cost = (1.0 - optimality) * ATTACK_ENERGY
@@ -154,7 +156,6 @@ func hit(direction, damage):
 	# called when an enemy hits the player
 	$AnimationTree["parameters/playback"].travel("Damaged")
 	lose_energy(damage)
-
 
 func _on_Timer_timeout():
 	emit_signal("died")

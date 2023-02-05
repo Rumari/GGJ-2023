@@ -326,7 +326,7 @@ nodes/Animation/position = Vector2( 20, 40 )
 nodes/Speed/node = SubResource( 31 )
 nodes/Speed/position = Vector2( 240, 100 )
 nodes/output/position = Vector2( 500, 180 )
-node_connections = [ "output", 0, "Speed", "Speed", 0, "Animation", "Speed", 1, "Animation 2" ]
+node_connections = [ "Speed", 0, "Animation", "Speed", 1, "Animation 2", "output", 0, "Speed" ]
 
 [sub_resource type="AnimationNodeAnimation" id=48]
 animation = "Punch"
@@ -340,7 +340,7 @@ nodes/Animation/position = Vector2( -20, 160 )
 nodes/TimeScale/node = SubResource( 49 )
 nodes/TimeScale/position = Vector2( 160, 120 )
 nodes/output/position = Vector2( 360, 180 )
-node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
+node_connections = [ "TimeScale", 0, "Animation", "output", 0, "TimeScale" ]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=34]
 switch_mode = 1
