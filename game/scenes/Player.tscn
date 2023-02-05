@@ -117,7 +117,7 @@ nodes/Speed/position = Vector2( 100, 20 )
 "nodes/Walking Animation/node" = SubResource( 5 )
 "nodes/Walking Animation/position" = Vector2( -140, 120 )
 nodes/output/position = Vector2( 1060, 360 )
-node_connections = [ "output", 0, "Block", "Charge", 0, "Punch", "Charge", 1, "Charge SM", "Speed", 0, "Idle Animation", "Speed", 1, "Walking Animation", "Punch", 0, "Speed", "Punch", 1, "Punch Scale", "Block Scale", 0, "Body Block Animation", "Block", 0, "Charge", "Block", 1, "Block Scale", "Punch Scale", 0, "Punch Animation" ]
+node_connections = [ "output", 0, "Block", "Speed", 0, "Idle Animation", "Speed", 1, "Walking Animation", "Punch Scale", 0, "Punch Animation", "Punch", 0, "Speed", "Punch", 1, "Punch Scale", "Block", 0, "Charge", "Block", 1, "Block Scale", "Charge", 0, "Punch", "Charge", 1, "Charge SM", "Block Scale", 0, "Body Block Animation" ]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=20]
 
