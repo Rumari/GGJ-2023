@@ -12,10 +12,13 @@ config_version=4
 
 config/name="ggj23"
 run/main_scene="res://scenes/Main Menu.tscn"
+"<<<<<<<HEAD[display]window/stretch/mode"="2d"
+window/stretch/aspect="keep"
 
-[autoload]
+[display]
 
-Globals="*res://scripts/Globals.gd"
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [editor_plugins]
 
