@@ -1,10 +1,38 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/Enemy Controller.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/Level Controller.gd" type="Script" id=3]
 
 [sub_resource type="PlaneMesh" id=2]
+
+[sub_resource type="Animation" id=3]
+resource_name = "Beat"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("DirectionalLight:light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.7, 0.7, 1.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:optimality")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.9, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0, 0.0, 1.0 ]
+}
 
 [node name="Level 1" type="Spatial"]
 script = ExtResource( 3 )
@@ -21,3 +49,7 @@ mesh = SubResource( 2 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.89111, 0.364153, -0.27077, 0, 0.596687, 0.802474, 0.453788, -0.715092, 0.531714, -7.87344, 10.1653, 0 )
+light_indirect_energy = 0.2
+
+[node name="BeatAnimator" type="AnimationPlayer" parent="."]
+anims/Beat = SubResource( 3 )

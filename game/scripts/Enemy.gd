@@ -26,6 +26,7 @@ const LIGHT_DAMAGE = 40
 const ATTACK_RANGE = 3.5
 const DISTANCE_RANGE = 6
 const RANDOM_DIR_TIME = 0.5
+const ATTACK_CHANCE = 0.75
 
 func _ready():
 	player = get_node(player)
@@ -112,6 +113,10 @@ func _physics_process(delta):
 func attack():
 	if stance != "attack":
 		return
+		
+	# randomly choose to not attack
+	if rand_range(0.0, 1.0) > ATTACK_CHANCE:
+		return
 
 	# check if player within bounds
 	var player_pos = to_plane(player.global_translation)
@@ -121,7 +126,7 @@ func attack():
 		punching = true
 		punching_time = DAMAGE_DELAY
 		$AnimationTree["parameters/Punch/active"] = true
-		
+
 func hit(damage):
 	if health == 0.0:
 		return	

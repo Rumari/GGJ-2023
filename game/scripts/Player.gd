@@ -11,12 +11,13 @@ export var energy = 100
 
 const ENERGY_RECHARGE_SPEED = 100
 const CHARGE_ENERGY = 30
-const LIGHT_ENERGY = 10
-const DAMAGE = 20
+const ATTACK_ENERGY = 10
+const LIGHT_DAMAGE = 20
+const HEAVY_DAMAGE = 40
+const MISS_PENALTY = 20
 
-# If the punch was charged, larger than zero
-# Higher values -> more damage
-var charged = 0
+const CHARGE_MIN_TIME = 1.0
+
 var charge_time = 0
 var time = 0
 
@@ -31,7 +32,7 @@ func _physics_process(delta):
 	
 	# get input dir
 	var direction = Vector2(0.0, 0.0)
-	if not $AnimationTree["parameters/Punch/active"] and not $AnimationTree["parameters/Charge/active"]:
+	if $AnimationTree["parameters/playback"].get_current_node() == "Moving":
 		if Input.is_action_pressed("left"):
 			direction.x = -1.0
 		elif Input.is_action_pressed("right"):
@@ -63,44 +64,74 @@ func _physics_process(delta):
 # warning-ignore:return_value_discarded
 		move_and_slide(Vector3(velocity.x, 0.0, velocity.y) * delta, Vector3.UP)
 
-	$AnimationTree["parameters/Speed/blend_amount"] = speed / max_speed
-	
-	if charged > 0.0 and time - charge_time > 0.5:
-		fail_charge()
+	$AnimationTree["parameters/Moving/Speed/blend_amount"] = speed / max_speed
 
 func _input(event):
-	if event.is_action_pressed("attack"):
-		if spend_energy(LIGHT_ENERGY):
-			if charged > 0.0:
-				if time - charge_time > 0.2:
-					charged = 0.0
-				else:
-					fail_charge()
-			else:
-				attack()
-				$AnimationTree["parameters/Punch/active"] = true
-	elif event.is_action_pressed("charge") and not $AnimationTree["parameters/Charge/active"]:
-		if spend_energy(CHARGE_ENERGY):
-			$AnimationTree["parameters/Charge/active"] = true
-			$AnimationTree["parameters/Charge SM/playback"].travel("Charge")
-			charged = 1.0
-			charge_time = time
+	var node = $AnimationTree["parameters/playback"].get_current_node()
+	var success = true
+	if event.is_action_pressed("attack") and node == "Moving":
+		if attack():
+			$AnimationTree["parameters/playback"].travel("Punch")
+			return
+	elif event.is_action_pressed("attack") and node == "Charge":
+		if attack():
+			$AnimationTree["parameters/playback"].travel("Charged Punch")
+			return
+	elif event.is_action_pressed("charge") and node == "Moving":
+		if charge():
+			$AnimationTree["parameters/playback"].travel("Charge")
+			return
+	else:
+		return
+	$AnimationTree["parameters/playback"].travel("Miss")
 
-func fail_charge():
-	$AnimationTree["parameters/Charge SM/playback"].travel("Cancel")
-	charged = 0.0
+func lose_energy(amount):
+	energy -= amount
+	print("lost %d energy (%d/100)" % [amount, energy])
+	if energy < 0.0:
+		energy = 0.0
+		emit_signal("died")
+		return false
+	else:
+		return true
 
 func spend_energy(amount):
 	if energy > amount:
-		energy -= amount
-		print("spent %d energy (%d/100)" % [amount, energy])
-		return true
-	return false
-	
+		return lose_energy(amount)
+	else:
+		return false
+
+func charge():
+	charge_time = time
+	return true
+
 func attack():
-	# called to attack close enemies
+	var optimality = get_parent().optimality
+	var damage
+
+	if $AnimationTree["parameters/playback"].get_current_node() == "Charged":
+		if time - charge_time < CHARGE_MIN_TIME:
+			return false
+		damage = HEAVY_DAMAGE
+	else:
+		damage = LIGHT_DAMAGE
+	damage *= optimality
+		
+	print("optimality: %f | damage: %f" % [ optimality, damage ])
+	
+	if optimality == 0.0:
+		spend_energy(MISS_PENALTY)
+		# todo: play anim?
+		return false
+	else:
+		var cost = (1.0 - optimality) * ATTACK_ENERGY
+		if not spend_energy(cost):
+			return false
+			
+	# attack nearby enemies
 	for enemy in $Hit.get_overlapping_bodies():
-		enemy.hit(DAMAGE)
+		enemy.hit(damage)
+	return true
 
 func hit(damage):
 	# called when an enemy hits the player

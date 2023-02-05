@@ -31,10 +31,7 @@ func enemy_died(enemy):
 		emit_signal("win")
 	else:
 		pick_attacker(enemies[0])
-		
-func on_attack(_i):
-	emit_signal("attack")
-		
+
 func enemy_want_attack(enemy):
 	pick_attacker(enemy)
 

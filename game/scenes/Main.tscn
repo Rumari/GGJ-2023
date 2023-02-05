@@ -11,8 +11,6 @@
 [ext_resource path="res://addons/mixing-desk/music/containers/core_cont.gd" type="Script" id=9]
 
 [sub_resource type="Environment" id=3]
-ambient_light_color = Color( 1, 1, 1, 1 )
-ambient_light_energy = 0.1
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
@@ -24,7 +22,7 @@ shader_param/amount = 256
 music = NodePath("../MixingDeskMusic")
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.707106, 0.707106, 0, -0.707106, 0.707106, 0, 15, 5 )
+transform = Transform( 1, 0, 0, 0, 0.766044, 0.642787, 0, -0.642787, 0.766044, 0, 12, 5 )
 environment = SubResource( 3 )
 fov = 63.3243
 
@@ -44,7 +42,7 @@ autoplay_song = NodePath("LevelTheme")
 [node name="LevelTheme" type="Node" parent="MixingDeskMusic"]
 script = ExtResource( 7 )
 tempo = 79
-bars = 4
+bars = 29
 beats_in_bar = 4
 transition_beats = 2.0
 transition_type = "Beat"
