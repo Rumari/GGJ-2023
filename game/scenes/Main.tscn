@@ -12,7 +12,6 @@
 [ext_resource path="res://assets/images/bar.png" type="Texture" id=10]
 [ext_resource path="res://assets/images/bar_juice1.png" type="Texture" id=11]
 [ext_resource path="res://assets/images/bar_under.png" type="Texture" id=12]
-
 [ext_resource path="res://scenes/EnergyBar.gd" type="Script" id=17]
 
 [sub_resource type="Environment" id=3]
@@ -360,7 +359,6 @@ margin_left = -160.0
 margin_top = -34.0
 margin_right = 1443.0
 margin_bottom = 662.0
-texture = ExtResource( 17 )
 expand = true
 __meta__ = {
 "_edit_lock_": true
