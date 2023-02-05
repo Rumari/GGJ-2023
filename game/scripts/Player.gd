@@ -21,7 +21,10 @@ var time = 0
 
 func _process(delta):
 	energy += delta * ENERGY_RECHARGE_SPEED
-	
+	energy = max(energy, 100)
+	if energy <= 0.0:
+		emit_signal("died")
+
 func _physics_process(delta):
 	time += delta
 	
@@ -58,7 +61,7 @@ func _physics_process(delta):
 		rotation.y = lerp_angle(rotation.y, angle, 0.3)
 # warning-ignore:return_value_discarded
 		move_and_slide(Vector3(velocity.x, 0.0, velocity.y) * delta, Vector3.UP)
-		
+
 	$AnimationTree["parameters/Speed/blend_amount"] = speed / max_speed
 	
 	if charged > 0.0 and time - charge_time > 0.5:

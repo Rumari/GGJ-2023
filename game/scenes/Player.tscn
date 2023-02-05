@@ -92,7 +92,7 @@ fadeout_time = 0.3
 animation = "Walking"
 
 [sub_resource type="AnimationNodeBlendTree" id=4]
-graph_offset = Vector2( -467.031, -51.7621 )
+graph_offset = Vector2( -532.113, -20.8863 )
 nodes/Block/node = SubResource( 10 )
 nodes/Block/position = Vector2( 840, 360 )
 "nodes/Block Scale/node" = SubResource( 12 )
