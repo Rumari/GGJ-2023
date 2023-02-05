@@ -98,8 +98,8 @@ func lose_energy(amount):
 	print("lost %d energy (%d/100)" % [amount, energy])
 	if energy <= 0.0:
 		energy = 0.0
-		$AnimationTree["parameters/playback"].travel("Chicken Dance")
-		$Timer.start(4)
+		$AnimationTree["parameters/playback"].travel("Death")
+		$Timer.start(3)
 		return false
 	else:
 		return true
