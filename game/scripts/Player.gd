@@ -9,7 +9,7 @@ var velocity = Vector2(0.0, 0.0)
 
 export var energy = 100
 
-const ENERGY_RECHARGE_SPEED = 100
+const ENERGY_RECHARGE_SPEED = 5
 const CHARGE_ENERGY = 30
 const ATTACK_ENERGY = 10
 const LIGHT_DAMAGE = 20
@@ -21,11 +21,13 @@ const CHARGE_MIN_TIME = 1.0
 var charge_time = 0
 var time = 0
 
+func _ready():
+	Globals.player = self
+
 func _process(delta):
-	energy += delta * ENERGY_RECHARGE_SPEED
-	energy = min(energy, 100)
-	if energy <= 0.0:
-		emit_signal("died")
+	if energy > 0.0:
+		energy += delta * ENERGY_RECHARGE_SPEED
+		energy = min(energy, 100)
 
 func _physics_process(delta):
 	time += delta
@@ -68,7 +70,6 @@ func _physics_process(delta):
 
 func _input(event):
 	var node = $AnimationTree["parameters/playback"].get_current_node()
-	var success = true
 	if event.is_action_pressed("attack") and node == "Moving":
 		if attack():
 			$AnimationTree["parameters/playback"].travel("Punch")
@@ -121,18 +122,21 @@ func attack():
 	
 	if optimality == 0.0:
 		spend_energy(MISS_PENALTY)
-		# todo: play anim?
+		$AnimationTree["parameters/playback"].travel("Miss")
 		return false
 	else:
 		var cost = (1.0 - optimality) * ATTACK_ENERGY
 		if not spend_energy(cost):
 			return false
-			
+
 	# attack nearby enemies
+	$AudioStreamPlayer.set_stream(Globals.HitFX)
+	$AudioStreamPlayer.play()
 	for enemy in $Hit.get_overlapping_bodies():
 		enemy.hit(damage)
 	return true
 
 func hit(damage):
 	# called when an enemy hits the player
+	$AnimationTree["parameters/playback"].travel("Damaged")
 	energy -= damage
