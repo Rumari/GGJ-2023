@@ -25,10 +25,9 @@ func _ready():
 	Globals.player = self
 
 func _process(delta):
-	energy += delta * ENERGY_RECHARGE_SPEED
-	energy = min(energy, 100)
-	if energy <= 0.0:
-		emit_signal("died")
+	if energy > 0.0:
+		energy += delta * ENERGY_RECHARGE_SPEED
+		energy = min(energy, 100)
 
 func _physics_process(delta):
 	time += delta
