@@ -9,6 +9,7 @@ var velocity = Vector2(0.0, 0.0)
 
 export var energy = 100
 
+const ENERGY_RECHARGE_SPEED = 5
 const CHARGE_ENERGY = 30
 const LIGHT_ENERGY = 10
 
@@ -17,20 +18,24 @@ const LIGHT_ENERGY = 10
 var charged = 0
 var charge_time = 0
 var time = 0
+
+func _process(delta):
+	energy += delta * ENERGY_RECHARGE_SPEED
 	
 func _physics_process(delta):
 	time += delta
 	
 	# get input dir
 	var direction = Vector2(0.0, 0.0)
-	if Input.is_action_pressed("left"):
-		direction.x = -1.0
-	elif Input.is_action_pressed("right"):
-		direction.x = 1.0
-	if Input.is_action_pressed("up"):
-		direction.y = -1.0
-	elif Input.is_action_pressed("down"):
-		direction.y = 1.0
+	if not $AnimationTree["parameters/Punch/active"] and not $AnimationTree["parameters/Charge/active"]:
+		if Input.is_action_pressed("left"):
+			direction.x = -1.0
+		elif Input.is_action_pressed("right"):
+			direction.x = 1.0
+		if Input.is_action_pressed("up"):
+			direction.y = -1.0
+		elif Input.is_action_pressed("down"):
+			direction.y = 1.0
 
 	var speed = velocity.length()
 	if direction.length() > 0:
