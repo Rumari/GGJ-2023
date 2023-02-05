@@ -369,3 +369,5 @@ expand = true
 __meta__ = {
 "_edit_lock_": true
 }
+
+[connection signal="hit" from="Level 1" to="." method="_on_Level_1_hit"]

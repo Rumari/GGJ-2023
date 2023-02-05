@@ -10,6 +10,8 @@ var time_between_beats
 var last_beat
 var time = 0.0
 
+signal hit
+
 func _ready():
 # warning-ignore:return_value_discarded
 	get_node(music).connect("beat", self, "on_beat")
@@ -31,3 +33,7 @@ func on_beat(i):
 
 func _on_Player_died():
 	get_tree().change_scene("res://scenes/Main Menu.tscn")
+
+
+func _on_Player_hit():
+	emit_signal("hit") # Replace with function body.

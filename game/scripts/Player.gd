@@ -1,6 +1,7 @@
 extends KinematicBody
 
 signal died
+signal hit
 
 export var max_speed = 400.0
 export var acceleration = 1500.0
@@ -144,6 +145,7 @@ func attack():
 	$AudioStreamPlayer.play()
 	for enemy in $Hit.get_overlapping_bodies():
 		enemy.hit(damage)
+	emit_signal("hit")
 	return true
 
 func hit(direction, damage):
