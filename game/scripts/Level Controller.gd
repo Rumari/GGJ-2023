@@ -5,9 +5,7 @@ export var optimality = 0.0
 
 const BEAT_START = 9
 const BEAT_PERIOD = 4
-const LIGHT_CHANGE_SPEED = 0.3
 
-var desired_light = 1.0
 var time_between_beats
 var last_beat
 var time = 0.0
