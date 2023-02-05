@@ -6,7 +6,7 @@ signal win
 signal attack
 
 export(NodePath) var player
-export var enemy_count = 1
+export var enemy_count = 5
 
 var enemies = []
 
