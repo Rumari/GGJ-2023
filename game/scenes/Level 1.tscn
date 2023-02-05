@@ -54,3 +54,5 @@ light_indirect_energy = 0.2
 
 [node name="BeatAnimator" type="AnimationPlayer" parent="."]
 anims/Beat = SubResource( 3 )
+
+[connection signal="died" from="Player" to="." method="_on_Player_died"]

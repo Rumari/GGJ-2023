@@ -24,7 +24,10 @@ func on_beat(i):
 	
 	print("beat %d" % i)	
 	if i >= BEAT_START and (i - BEAT_START) % BEAT_PERIOD == 0:
-		$BeatAnimator.playback_speed = 1.0 / (time_between_beats * BEAT_PERIOD)
+		$BeatAnimator.playback_speed = 5.0 / (time_between_beats * BEAT_PERIOD)
 		$BeatAnimator.play("Beat")
 		print("attack on beat %d" % i)
 		$"Enemy Controller".emit_signal("attack")
+
+func _on_Player_died():
+	get_tree().change_scene("res://scenes/Main Menu.tscn")
