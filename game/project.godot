@@ -13,6 +13,10 @@ config_version=4
 config/name="ggj23"
 run/main_scene="res://scenes/Main Menu.tscn"
 
+[autoload]
+
+Globals="*res://scripts/Globals.gd"
+
 [editor_plugins]
 
 enabled=PoolStringArray( "res://addons/mixing-desk/plugin.cfg" )

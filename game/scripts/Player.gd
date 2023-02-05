@@ -9,7 +9,7 @@ var velocity = Vector2(0.0, 0.0)
 
 export var energy = 100
 
-const ENERGY_RECHARGE_SPEED = 100
+const ENERGY_RECHARGE_SPEED = 5
 const CHARGE_ENERGY = 30
 const ATTACK_ENERGY = 10
 const LIGHT_DAMAGE = 20
@@ -20,6 +20,9 @@ const CHARGE_MIN_TIME = 1.0
 
 var charge_time = 0
 var time = 0
+
+func _ready():
+	Globals.player = self
 
 func _process(delta):
 	energy += delta * ENERGY_RECHARGE_SPEED
