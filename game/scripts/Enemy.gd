@@ -14,10 +14,15 @@ var random_direction = null
 var random_time = 0.0
 var face_direction = null
 
+var punching = false
+var punching_time
+
 export var health = 100
 export var stance = "distance"
 export(NodePath) var player
 
+const DAMAGE_DELAY = 0.3
+const LIGHT_DAMAGE = 40
 const ATTACK_RANGE = 3.5
 const DISTANCE_RANGE = 6
 const RANDOM_DIR_TIME = 0.5
@@ -26,6 +31,11 @@ func _ready():
 	player = get_node(player)
 
 func _process(delta):
+	if health == 0.0:
+		if not $AnimationTree["parameters/Death/active"]:
+			queue_free()
+		return
+
 	random_time += delta
 	
 	var player_pos = to_plane(player.global_translation)
@@ -62,10 +72,17 @@ func _process(delta):
 		else:
 			direction = Vector2(0.0, 0.0)
 			face_direction = player_dir
-			# todo: attack
-			pass
+			
+		if punching:
+			punching_time -= delta
+			if punching_time <= 0.0:
+				punching = false
+				player.hit(LIGHT_DAMAGE)
 
 func _physics_process(delta):
+	if health == 0.0:
+		return
+	
 	var speed = velocity.length()
 	if direction.length() > 0:
 		# increase velocity
@@ -95,7 +112,25 @@ func _physics_process(delta):
 func attack():
 	if stance != "attack":
 		return
-	$AnimationTree["parameters/Punch/active"] = true
+
+	# check if player within bounds
+	var player_pos = to_plane(player.global_translation)
+	var pos = to_plane(global_translation)
+	var distance = (player_pos - pos).length()
+	if distance < ATTACK_RANGE:
+		punching = true
+		punching_time = DAMAGE_DELAY
+		$AnimationTree["parameters/Punch/active"] = true
+		
+func hit(damage):
+	if health == 0.0:
+		return	
+	health -= damage
+	print("took %d damage (%d/100)" % [ damage, health ])
+	if health <= 0.0:
+		health = 0.0
+		emit_signal("died", self)
+		$AnimationTree["parameters/Death/active"] = true
 
 func to_plane(pos):
 	return Vector2(pos.x, pos.z)

@@ -12,20 +12,18 @@ var enemies = []
 
 func _ready():
 	# spawn enemies
-	for i in range(enemy_count):
+	for _i in range(enemy_count):
 		var enemy = Enemy.instance()
 		enemy.set("player", "../" + player)
 		enemy.connect("died", self, "enemy_died")
 		enemy.connect("want_attack", self, "enemy_want_attack")
+# warning-ignore:return_value_discarded
 		connect("attack", enemy, "attack")
 		enemy.translation.x = rand_range(-5.0, 5.0)
 		enemy.translation.z = rand_range(-10.0, 0.0)
 		enemies.push_back(enemy)
 		add_child(enemy) 
 	pick_attacker(enemies[0])
-
-func _process(delta):
-	pass
 
 func enemy_died(enemy):
 	enemies.remove(enemies.find(enemy))
@@ -34,7 +32,7 @@ func enemy_died(enemy):
 	else:
 		pick_attacker(enemies[0])
 		
-func on_attack(i):
+func on_attack(_i):
 	emit_signal("attack")
 		
 func enemy_want_attack(enemy):

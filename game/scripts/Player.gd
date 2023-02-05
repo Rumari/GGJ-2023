@@ -9,9 +9,10 @@ var velocity = Vector2(0.0, 0.0)
 
 export var energy = 100
 
-const ENERGY_RECHARGE_SPEED = 5
+const ENERGY_RECHARGE_SPEED = 100
 const CHARGE_ENERGY = 30
 const LIGHT_ENERGY = 10
+const DAMAGE = 20
 
 # If the punch was charged, larger than zero
 # Higher values -> more damage
@@ -76,6 +77,7 @@ func _input(event):
 				else:
 					fail_charge()
 			else:
+				attack()
 				$AnimationTree["parameters/Punch/active"] = true
 	elif event.is_action_pressed("charge") and not $AnimationTree["parameters/Charge/active"]:
 		if spend_energy(CHARGE_ENERGY):
@@ -94,3 +96,12 @@ func spend_energy(amount):
 		print("spent %d energy (%d/100)" % [amount, energy])
 		return true
 	return false
+	
+func attack():
+	# called to attack close enemies
+	for enemy in $Hit.get_overlapping_bodies():
+		enemy.hit(DAMAGE)
+
+func hit(damage):
+	# called when an enemy hits the player
+	energy -= damage

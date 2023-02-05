@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://assets/materials/Player.material" type="Material" id=1]
 [ext_resource path="res://assets/animations/player/Chicken Dance.tres" type="Animation" id=2]
@@ -121,8 +121,13 @@ node_connections = [ "output", 0, "Block", "Charge", 0, "Punch", "Charge", 1, "C
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=20]
 
+[sub_resource type="CapsuleShape" id=24]
+radius = 1.5
+height = 2.0
+
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, -0.000305733, 7.64527e-05, 0.000305745, 1, -0.000150085, -7.64078e-05, 0.000150108, 1, 0, 0, 0 )
+collision_mask = 3
 script = ExtResource( 6 )
 
 [node name="Skeleton" type="Skeleton" parent="."]
@@ -363,3 +368,11 @@ parameters/Charge/active = false
 parameters/Punch/active = false
 "parameters/Punch Scale/scale" = 1.5
 parameters/Speed/blend_amount = 0.0
+
+[node name="Hit" type="Area" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="Capsule" type="CollisionShape" parent="Hit"]
+transform = Transform( 1, 0, 5.70299e-12, -2.54019e-12, -4.3714e-08, -1, 0, 1, -4.3714e-08, 0.0169836, 2.11629, 0.843961 )
+shape = SubResource( 24 )
