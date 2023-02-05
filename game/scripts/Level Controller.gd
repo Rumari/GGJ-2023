@@ -3,7 +3,7 @@ extends Spatial
 export(NodePath) var music
 export var optimality = 0.0
 
-const BEAT_START = 17
+const BEAT_START = 2
 const BEAT_PERIOD = 1
 
 var time_between_beats
