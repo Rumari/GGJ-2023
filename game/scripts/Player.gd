@@ -10,6 +10,7 @@ var velocity = Vector2(0.0, 0.0)
 export var energy = 100
 
 const ENERGY_RECHARGE_SPEED = 5
+const BLOCK_REWARD = 30
 const CHARGE_ENERGY = 30
 const ATTACK_ENERGY = 10
 const LIGHT_DAMAGE = 20
@@ -20,6 +21,7 @@ const CHARGE_MIN_TIME = 1.0
 
 var charge_time = 0
 var time = 0
+var move_optimality
 
 func _ready():
 	Globals.player = self
@@ -46,12 +48,17 @@ func _physics_process(delta):
 
 	var speed = velocity.length()
 	if direction.length() > 0:
+		if move_optimality == null:
+			move_optimality = get_parent().optimality
+		
 		# increase velocity
 		speed += acceleration * delta
 		if speed > max_speed:
 			speed = max_speed
 		velocity = direction.normalized() * speed
 	else:
+		move_optimality = null
+		
 		# decrease velocity
 		speed -= deceleration * delta
 		if speed <= 0.0:
@@ -91,8 +98,8 @@ func lose_energy(amount):
 	print("lost %d energy (%d/100)" % [amount, energy])
 	if energy <= 0.0:
 		energy = 0.0
-		$AnimationTree["parameters/playback"].travel("Chicken Dance")
-		$Timer.start(1)
+		$AnimationTree["parameters/playback"].travel("Death")
+		$Timer.start(3)
 		return false
 	else:
 		return true
@@ -137,7 +144,13 @@ func attack():
 		enemy.hit(damage)
 	return true
 
-func hit(damage):
+func hit(direction, damage):
+	if move_optimality != null and move_optimality > 0.0:
+		if direction.dot(velocity.normalized()) > 0.3:
+			$AnimationTree["parameters/playback"].travel("Body Block")
+			energy += BLOCK_REWARD * move_optimality
+			return
+	
 	# called when an enemy hits the player
 	$AnimationTree["parameters/playback"].travel("Damaged")
 	lose_energy(damage)

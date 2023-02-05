@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://assets/materials/Player.material" type="Material" id=1]
 [ext_resource path="res://assets/animations/player/Chicken Dance.tres" type="Animation" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/animations/player/Charged Punch.tres" type="Animation" id=11]
 [ext_resource path="res://assets/animations/player/Idle Short.tres" type="Animation" id=12]
 [ext_resource path="res://assets/animations/player/Charge.tres" type="Animation" id=13]
+[ext_resource path="res://assets/animations/player/Death.tres" type="Animation" id=14]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "playerMesh"
@@ -299,11 +300,11 @@ animation = "Charge"
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "Charged Punch"
 
-[sub_resource type="AnimationNodeAnimation" id=58]
-animation = "Chicken Dance"
-
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Damaged"
+
+[sub_resource type="AnimationNodeAnimation" id=58]
+animation = "Death"
 
 [sub_resource type="AnimationNodeAnimation" id=28]
 animation = "Big Hit To Head"
@@ -389,6 +390,7 @@ auto_advance = true
 xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=59]
+xfade_time = 0.3
 
 [sub_resource type="AnimationNodeStateMachine" id=42]
 "states/Body Block/node" = SubResource( 25 )
@@ -397,19 +399,19 @@ states/Charge/node = SubResource( 26 )
 states/Charge/position = Vector2( 677, 189 )
 "states/Charged Punch/node" = SubResource( 27 )
 "states/Charged Punch/position" = Vector2( 555, 87 )
-"states/Chicken Dance/node" = SubResource( 58 )
-"states/Chicken Dance/position" = Vector2( 224, 305 )
 states/Damaged/node = SubResource( 55 )
 states/Damaged/position = Vector2( 364, 87 )
+states/Death/node = SubResource( 58 )
+states/Death/position = Vector2( 217, 305 )
 states/Miss/node = SubResource( 28 )
 states/Miss/position = Vector2( 677, 305 )
 states/Moving/node = SubResource( 32 )
 states/Moving/position = Vector2( 426, 189 )
 states/Punch/node = SubResource( 50 )
 states/Punch/position = Vector2( 426, 305 )
-transitions = [ "Moving", "Charge", SubResource( 34 ), "Charge", "Charged Punch", SubResource( 35 ), "Moving", "Body Block", SubResource( 37 ), "Charge", "Miss", SubResource( 39 ), "Miss", "Moving", SubResource( 41 ), "Body Block", "Moving", SubResource( 44 ), "Charged Punch", "Moving", SubResource( 46 ), "Moving", "Miss", SubResource( 47 ), "Moving", "Punch", SubResource( 51 ), "Punch", "Moving", SubResource( 52 ), "Moving", "Damaged", SubResource( 56 ), "Damaged", "Moving", SubResource( 57 ), "Moving", "Chicken Dance", SubResource( 59 ) ]
+transitions = [ "Moving", "Charge", SubResource( 34 ), "Charge", "Charged Punch", SubResource( 35 ), "Moving", "Body Block", SubResource( 37 ), "Charge", "Miss", SubResource( 39 ), "Miss", "Moving", SubResource( 41 ), "Body Block", "Moving", SubResource( 44 ), "Charged Punch", "Moving", SubResource( 46 ), "Moving", "Miss", SubResource( 47 ), "Moving", "Punch", SubResource( 51 ), "Punch", "Moving", SubResource( 52 ), "Moving", "Damaged", SubResource( 56 ), "Damaged", "Moving", SubResource( 57 ), "Moving", "Death", SubResource( 59 ) ]
 start_node = "Moving"
-graph_offset = Vector2( -90, 14.3927 )
+graph_offset = Vector2( -237, 107.393 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=43]
 
@@ -419,7 +421,6 @@ height = 2.0
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, -0.000305733, 7.64527e-05, 0.000305745, 1, -0.000150085, -7.64078e-05, 0.000150108, 1, 0, 0, 0 )
-collision_mask = 3
 script = ExtResource( 6 )
 
 [node name="Skeleton" type="Skeleton" parent="."]
@@ -641,6 +642,7 @@ anims/Charge = ExtResource( 13 )
 "anims/Chicken Dance" = ExtResource( 2 )
 "anims/Combo Punch" = ExtResource( 10 )
 anims/Damaged = SubResource( 54 )
+anims/Death = ExtResource( 14 )
 "anims/Fast Run" = ExtResource( 4 )
 anims/Idle = ExtResource( 7 )
 "anims/Idle Short" = ExtResource( 12 )
