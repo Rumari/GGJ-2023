@@ -21,7 +21,7 @@ shader_param/amount = 256
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.69437, 0, -10.5726 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 0.9011, -0.195952, 0.38681, 0, 0.892066, 0.451905, -0.433612, -0.407212, 0.80384, 7.52932, 5.44213, 0 )
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 10, 5 )
 environment = SubResource( 3 )
 fov = 63.3243
 
