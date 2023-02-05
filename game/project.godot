@@ -15,7 +15,7 @@ run/main_scene="res://scenes/Main.tscn"
 
 [editor_plugins]
 
-enabled=PoolStringArray(  )
+enabled=PoolStringArray( "res://addons/mixing-desk/plugin.cfg" )
 
 [gui]
 
