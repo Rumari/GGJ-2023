@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://assets/materials/Player.material" type="Material" id=1]
 [ext_resource path="res://assets/animations/player/Chicken Dance.tres" type="Animation" id=2]
@@ -299,6 +299,9 @@ animation = "Charge"
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "Charged Punch"
 
+[sub_resource type="AnimationNodeAnimation" id=58]
+animation = "Chicken Dance"
+
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Damaged"
 
@@ -385,6 +388,8 @@ switch_mode = 2
 auto_advance = true
 xfade_time = 0.2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+
 [sub_resource type="AnimationNodeStateMachine" id=42]
 "states/Body Block/node" = SubResource( 25 )
 "states/Body Block/position" = Vector2( 217, 189 )
@@ -392,6 +397,8 @@ states/Charge/node = SubResource( 26 )
 states/Charge/position = Vector2( 677, 189 )
 "states/Charged Punch/node" = SubResource( 27 )
 "states/Charged Punch/position" = Vector2( 555, 87 )
+"states/Chicken Dance/node" = SubResource( 58 )
+"states/Chicken Dance/position" = Vector2( 224, 305 )
 states/Damaged/node = SubResource( 55 )
 states/Damaged/position = Vector2( 364, 87 )
 states/Miss/node = SubResource( 28 )
@@ -400,7 +407,7 @@ states/Moving/node = SubResource( 32 )
 states/Moving/position = Vector2( 426, 189 )
 states/Punch/node = SubResource( 50 )
 states/Punch/position = Vector2( 426, 305 )
-transitions = [ "Moving", "Charge", SubResource( 34 ), "Charge", "Charged Punch", SubResource( 35 ), "Moving", "Body Block", SubResource( 37 ), "Charge", "Miss", SubResource( 39 ), "Miss", "Moving", SubResource( 41 ), "Body Block", "Moving", SubResource( 44 ), "Charged Punch", "Moving", SubResource( 46 ), "Moving", "Miss", SubResource( 47 ), "Moving", "Punch", SubResource( 51 ), "Punch", "Moving", SubResource( 52 ), "Moving", "Damaged", SubResource( 56 ), "Damaged", "Moving", SubResource( 57 ) ]
+transitions = [ "Moving", "Charge", SubResource( 34 ), "Charge", "Charged Punch", SubResource( 35 ), "Moving", "Body Block", SubResource( 37 ), "Charge", "Miss", SubResource( 39 ), "Miss", "Moving", SubResource( 41 ), "Body Block", "Moving", SubResource( 44 ), "Charged Punch", "Moving", SubResource( 46 ), "Moving", "Miss", SubResource( 47 ), "Moving", "Punch", SubResource( 51 ), "Punch", "Moving", SubResource( 52 ), "Moving", "Damaged", SubResource( 56 ), "Damaged", "Moving", SubResource( 57 ), "Moving", "Chicken Dance", SubResource( 59 ) ]
 start_node = "Moving"
 graph_offset = Vector2( -238, 57.3927 )
 
@@ -661,3 +668,9 @@ transform = Transform( 1, 0, 5.70299e-12, -2.54019e-12, -4.3714e-08, -1, 0, 1, -
 shape = SubResource( 24 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

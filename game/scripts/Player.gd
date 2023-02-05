@@ -96,9 +96,10 @@ func _input(event):
 func lose_energy(amount):
 	energy -= amount
 	print("lost %d energy (%d/100)" % [amount, energy])
-	if energy < 0.0:
+	if energy <= 0.0:
 		energy = 0.0
-		emit_signal("died")
+		$AnimationTree["parameters/playback"].travel("Chicken Dance")
+		$Timer.start(4)
 		return false
 	else:
 		return true
@@ -152,4 +153,8 @@ func hit(direction, damage):
 	
 	# called when an enemy hits the player
 	$AnimationTree["parameters/playback"].travel("Damaged")
-	energy -= damage
+	lose_energy(damage)
+
+
+func _on_Timer_timeout():
+	emit_signal("died")
