@@ -1,9 +1,16 @@
 extends KinematicBody
 
+signal died
+
 export var max_speed = 400.0
 export var acceleration = 1500.0
 export var deceleration = 1000.0
 var velocity = Vector2(0.0, 0.0)
+
+export var energy = 100
+
+const CHARGE_ENERGY = 30
+const LIGHT_ENERGY = 10
 
 # If the punch was charged, larger than zero
 # Higher values -> more damage
@@ -54,19 +61,28 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("attack"):
-		if charged > 0.0:
-			if time - charge_time > 0.2:
-				charged = 0.0
+		if spend_energy(LIGHT_ENERGY):
+			if charged > 0.0:
+				if time - charge_time > 0.2:
+					charged = 0.0
+				else:
+					fail_charge()
 			else:
-				fail_charge()
-		else:
-			$AnimationTree["parameters/Punch/active"] = true
+				$AnimationTree["parameters/Punch/active"] = true
 	elif event.is_action_pressed("charge") and not $AnimationTree["parameters/Charge/active"]:
-		$AnimationTree["parameters/Charge/active"] = true
-		$AnimationTree["parameters/Charge SM/playback"].travel("Charge")
-		charged = 1.0
-		charge_time = time
+		if spend_energy(CHARGE_ENERGY):
+			$AnimationTree["parameters/Charge/active"] = true
+			$AnimationTree["parameters/Charge SM/playback"].travel("Charge")
+			charged = 1.0
+			charge_time = time
 
 func fail_charge():
 	$AnimationTree["parameters/Charge SM/playback"].travel("Cancel")
-	charged =  0.0
+	charged = 0.0
+
+func spend_energy(amount):
+	if energy > amount:
+		energy -= amount
+		print("spent %d energy (%d/100)" % [amount, energy])
+		return true
+	return false
