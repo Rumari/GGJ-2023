@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://shaders/Pixels.tres" type="Shader" id=1]
 [ext_resource path="res://scenes/Level 1.tscn" type="PackedScene" id=2]
@@ -9,6 +9,9 @@
 [ext_resource path="res://addons/mixing-desk/music/song.gd" type="Script" id=7]
 [ext_resource path="res://addons/mixing-desk/music/mixing_desk_music.gd" type="Script" id=8]
 [ext_resource path="res://addons/mixing-desk/music/containers/core_cont.gd" type="Script" id=9]
+[ext_resource path="res://assets/images/bar.png" type="Texture" id=10]
+[ext_resource path="res://assets/images/bar_juice1.png" type="Texture" id=11]
+[ext_resource path="res://assets/images/bar_under.png" type="Texture" id=12]
 
 [sub_resource type="Environment" id=3]
 
@@ -32,6 +35,21 @@ fov = 63.3243
 material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="HUD" type="Control" parent="Pixels"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="EnergyBar" type="TextureProgress" parent="Pixels/HUD"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 486.0
+margin_bottom = 70.0
+value = 100.0
+texture_under = ExtResource( 12 )
+texture_over = ExtResource( 10 )
+texture_progress = ExtResource( 11 )
+texture_progress_offset = Vector2( 9, 3 )
 
 [node name="MixingDeskMusic" type="Node" parent="."]
 script = ExtResource( 8 )

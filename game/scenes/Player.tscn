@@ -124,7 +124,55 @@ transitions = [ "Moving", "Charge", SubResource( 34 ), "Charge", "Charged Punch"
 start_node = "Moving"
 graph_offset = Vector2( -18, 32.3927 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=43]
+[sub_resource type="AnimationNodeOneShot" id=13]
+fadein_time = 0.4
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Punch"
+
+[sub_resource type="AnimationNodeTimeScale" id=9]
+
+[sub_resource type="AnimationNodeOneShot" id=8]
+fadein_time = 0.2
+fadeout_time = 0.3
+
+[sub_resource type="AnimationNodeBlend2" id=6]
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "Walking"
+
+[sub_resource type="AnimationNodeBlendTree" id=4]
+graph_offset = Vector2( 111.699, 327.645 )
+nodes/Block/node = SubResource( 10 )
+nodes/Block/position = Vector2( 840, 360 )
+"nodes/Block Scale/node" = SubResource( 12 )
+"nodes/Block Scale/position" = Vector2( 580, 460 )
+"nodes/Body Block Animation/node" = SubResource( 11 )
+"nodes/Body Block Animation/position" = Vector2( 280, 540 )
+nodes/Charge/node = SubResource( 13 )
+nodes/Charge/position = Vector2( 600, 220 )
+"nodes/Charge SM/node" = SubResource( 19 )
+"nodes/Charge SM/position" = Vector2( 280, 380 )
+"nodes/Idle Animation/node" = SubResource( 3 )
+"nodes/Idle Animation/position" = Vector2( -140, 0 )
+nodes/Punch/node = SubResource( 8 )
+nodes/Punch/position = Vector2( 340, 100 )
+"nodes/Punch Animation/node" = SubResource( 7 )
+"nodes/Punch Animation/position" = Vector2( -140, 260 )
+"nodes/Punch Scale/node" = SubResource( 9 )
+"nodes/Punch Scale/position" = Vector2( 80, 260 )
+nodes/Speed/node = SubResource( 6 )
+nodes/Speed/position = Vector2( 100, 20 )
+"nodes/Walking Animation/node" = SubResource( 5 )
+"nodes/Walking Animation/position" = Vector2( -140, 120 )
+nodes/output/position = Vector2( 1060, 360 )
+node_connections = [ "output", 0, "Block", "Speed", 0, "Idle Animation", "Speed", 1, "Walking Animation", "Punch Scale", 0, "Punch Animation", "Punch", 0, "Speed", "Punch", 1, "Punch Scale", "Block", 0, "Charge", "Block", 1, "Block Scale", "Charge", 0, "Punch", "Charge", 1, "Charge SM", "Block Scale", 0, "Body Block Animation" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=20]
 
 [sub_resource type="CapsuleShape" id=24]
 radius = 1.5
