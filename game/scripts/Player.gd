@@ -159,5 +159,9 @@ func hit(direction, damage):
 	$AnimationTree["parameters/playback"].travel("Damaged")
 	lose_energy(damage)
 
+func win():
+	$AnimationTree["parameters/playback"].travel("Chicken Dance")
+	$Timer.start(3)
+
 func _on_Timer_timeout():
 	emit_signal("died")

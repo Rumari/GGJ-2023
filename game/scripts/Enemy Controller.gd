@@ -11,6 +11,8 @@ export var enemy_count = 5
 var enemies = []
 
 func _ready():
+	connect("win", get_node(player), "win")
+	
 	# spawn enemies
 	for _i in range(enemy_count):
 		var enemy = Enemy.instance()
