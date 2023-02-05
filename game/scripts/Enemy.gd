@@ -92,5 +92,10 @@ func _physics_process(delta):
 		
 	$AnimationTree["parameters/Speed/blend_amount"] = speed / max_speed
 
+func attack():
+	if stance != "attack":
+		return
+	$AnimationTree["parameters/Punch/active"] = true
+
 func to_plane(pos):
 	return Vector2(pos.x, pos.z)

@@ -21,7 +21,7 @@ var time = 0
 
 func _process(delta):
 	energy += delta * ENERGY_RECHARGE_SPEED
-	energy = max(energy, 100)
+	energy = min(energy, 100)
 	if energy <= 0.0:
 		emit_signal("died")
 

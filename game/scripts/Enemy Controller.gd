@@ -3,6 +3,7 @@ extends Spatial
 const Enemy = preload("res://scenes/Enemy.tscn")
 
 signal win
+signal attack
 
 export(NodePath) var player
 export var enemy_count = 5
@@ -10,11 +11,13 @@ export var enemy_count = 5
 var enemies = []
 
 func _ready():
+	# spawn enemies
 	for i in range(enemy_count):
 		var enemy = Enemy.instance()
 		enemy.set("player", "../" + player)
 		enemy.connect("died", self, "enemy_died")
 		enemy.connect("want_attack", self, "enemy_want_attack")
+		connect("attack", enemy, "attack")
 		enemy.translation.x = rand_range(-5.0, 5.0)
 		enemy.translation.z = rand_range(-10.0, 0.0)
 		enemies.push_back(enemy)
@@ -30,6 +33,9 @@ func enemy_died(enemy):
 		emit_signal("win")
 	else:
 		pick_attacker(enemies[0])
+		
+func on_attack(i):
+	emit_signal("attack")
 		
 func enemy_want_attack(enemy):
 	pick_attacker(enemy)

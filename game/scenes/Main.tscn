@@ -21,9 +21,10 @@ shader_param/amount = 256
 [node name="Main" type="Spatial"]
 
 [node name="Level 1" parent="." instance=ExtResource( 2 )]
+music = NodePath("../MixingDeskMusic")
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 10, 5 )
+transform = Transform( 1, 0, 0, 0, 0.707106, 0.707106, 0, -0.707106, 0.707106, 0, 15, 5 )
 environment = SubResource( 3 )
 fov = 63.3243
 
