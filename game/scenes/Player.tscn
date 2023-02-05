@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assets/materials/Player.material" type="Material" id=1]
 [ext_resource path="res://assets/animations/Chicken Dance.tres" type="Animation" id=2]
@@ -7,6 +7,11 @@
 [ext_resource path="res://assets/animations/Big Hit To Head.tres" type="Animation" id=5]
 [ext_resource path="res://scripts/Player.gd" type="Script" id=6]
 [ext_resource path="res://assets/animations/Idle.tres" type="Animation" id=7]
+[ext_resource path="res://assets/animations/Punch.tres" type="Animation" id=8]
+[ext_resource path="res://assets/animations/Body Block.tres" type="Animation" id=9]
+[ext_resource path="res://assets/animations/Combo Punch.tres" type="Animation" id=10]
+[ext_resource path="res://assets/animations/Charged Punch.tres" type="Animation" id=11]
+[ext_resource path="res://assets/animations/Idle Short.tres" type="Animation" id=12]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "playerMesh"
@@ -27,8 +32,59 @@ surfaces/0 = {
 [sub_resource type="CapsuleShape" id=2]
 height = 3.0
 
+[sub_resource type="AnimationNodeTimeScale" id=12]
+
+[sub_resource type="AnimationNodeOneShot" id=10]
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "Body Block"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "Idle Short"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Charged Punch"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "Idle Short"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=19]
+states/Cancel/node = SubResource( 17 )
+states/Cancel/position = Vector2( 387, 283 )
+states/Charge/node = SubResource( 16 )
+states/Charge/position = Vector2( 387, 132 )
+states/Idle/node = SubResource( 21 )
+states/Idle/position = Vector2( 601, 200 )
+transitions = [ "Charge", "Cancel", SubResource( 18 ), "Charge", "Idle", SubResource( 22 ), "Cancel", "Idle", SubResource( 23 ) ]
+start_node = "Charge"
+end_node = "Idle"
+
+[sub_resource type="AnimationNodeOneShot" id=13]
+fadein_time = 0.4
+fadeout_time = 0.3
+
 [sub_resource type="AnimationNodeAnimation" id=3]
 animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Punch"
+
+[sub_resource type="AnimationNodeTimeScale" id=9]
+
+[sub_resource type="AnimationNodeOneShot" id=8]
+fadein_time = 0.2
+fadeout_time = 0.3
 
 [sub_resource type="AnimationNodeBlend2" id=6]
 
@@ -36,15 +92,33 @@ animation = "Idle"
 animation = "Walking"
 
 [sub_resource type="AnimationNodeBlendTree" id=4]
-graph_offset = Vector2( -266.85, 26.9381 )
-nodes/Idle/node = SubResource( 3 )
-nodes/Idle/position = Vector2( -80, 100 )
+graph_offset = Vector2( -276.525, 42.9954 )
+nodes/Block/node = SubResource( 10 )
+nodes/Block/position = Vector2( 840, 360 )
+"nodes/Block Scale/node" = SubResource( 12 )
+"nodes/Block Scale/position" = Vector2( 580, 460 )
+"nodes/Body Block Animation/node" = SubResource( 11 )
+"nodes/Body Block Animation/position" = Vector2( 280, 540 )
+nodes/Charge/node = SubResource( 13 )
+nodes/Charge/position = Vector2( 600, 220 )
+"nodes/Charge SM/node" = SubResource( 19 )
+"nodes/Charge SM/position" = Vector2( 280, 380 )
+"nodes/Idle Animation/node" = SubResource( 3 )
+"nodes/Idle Animation/position" = Vector2( -140, 0 )
+nodes/Punch/node = SubResource( 8 )
+nodes/Punch/position = Vector2( 340, 100 )
+"nodes/Punch Animation/node" = SubResource( 7 )
+"nodes/Punch Animation/position" = Vector2( -140, 260 )
+"nodes/Punch Scale/node" = SubResource( 9 )
+"nodes/Punch Scale/position" = Vector2( 80, 260 )
 nodes/Speed/node = SubResource( 6 )
-nodes/Speed/position = Vector2( 140, 120 )
-nodes/Walking/node = SubResource( 5 )
-nodes/Walking/position = Vector2( -80, 220 )
-nodes/output/position = Vector2( 440, 140 )
-node_connections = [ "output", 0, "Speed", "Speed", 0, "Idle", "Speed", 1, "Walking" ]
+nodes/Speed/position = Vector2( 100, 20 )
+"nodes/Walking Animation/node" = SubResource( 5 )
+"nodes/Walking Animation/position" = Vector2( -140, 120 )
+nodes/output/position = Vector2( 1060, 360 )
+node_connections = [ "output", 0, "Block", "Block", 0, "Charge", "Block", 1, "Block Scale", "Speed", 0, "Idle Animation", "Speed", 1, "Walking Animation", "Punch Scale", 0, "Punch Animation", "Block Scale", 0, "Body Block Animation", "Punch", 0, "Speed", "Punch", 1, "Punch Scale", "Charge", 0, "Punch", "Charge", 1, "Charge SM" ]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=20]
 
 [node name="Player" type="KinematicBody"]
 transform = Transform( 1, -0.000305733, 7.64527e-05, 0.000305745, 1, -0.000150085, -7.64078e-05, 0.000150108, 1, 0, 0, 0 )
@@ -263,9 +337,14 @@ mesh = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 "anims/Big Hit To Head" = ExtResource( 5 )
+"anims/Body Block" = ExtResource( 9 )
+"anims/Charged Punch" = ExtResource( 11 )
 "anims/Chicken Dance" = ExtResource( 2 )
+"anims/Combo Punch" = ExtResource( 10 )
 "anims/Fast Run" = ExtResource( 4 )
 anims/Idle = ExtResource( 7 )
+"anims/Idle Short" = ExtResource( 12 )
+anims/Punch = ExtResource( 8 )
 anims/Walking = ExtResource( 3 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
@@ -276,4 +355,10 @@ shape = SubResource( 2 )
 tree_root = SubResource( 4 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
+parameters/Block/active = false
+"parameters/Block Scale/scale" = 1.5
+parameters/Charge/active = false
+"parameters/Charge SM/playback" = SubResource( 20 )
+parameters/Punch/active = false
+"parameters/Punch Scale/scale" = 1.5
 parameters/Speed/blend_amount = 0.0

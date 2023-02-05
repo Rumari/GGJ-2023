@@ -1,16 +1,19 @@
 extends KinematicBody
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 export var max_speed = 400.0
 export var acceleration = 1500.0
 export var deceleration = 1000.0
 var velocity = Vector2(0.0, 0.0)
+
+# If the punch was charged, larger than zero
+# Higher values -> more damage
+var charged = 0
+var charge_time = 0
+var time = 0
 	
 func _physics_process(delta):
+	time += delta
+	
 	# get input dir
 	var direction = Vector2(0.0, 0.0)
 	if Input.is_action_pressed("left"):
@@ -38,20 +41,32 @@ func _physics_process(delta):
 		else:
 			velocity = velocity.normalized() * speed
 
-	$AnimationTree["parameters/Speed/blend_amount"] = speed / max_speed
-
 	if velocity.length() > 0:
 		var angle = atan2(velocity.x, velocity.y)
 		rotation.y = lerp_angle(rotation.y, angle, 0.3)
 # warning-ignore:return_value_discarded
 		move_and_slide(Vector3(velocity.x, 0.0, velocity.y) * delta, Vector3.UP)
+		
+	$AnimationTree["parameters/Speed/blend_amount"] = speed / max_speed
+	
+	if charged > 0.0 and time - charge_time > 0.5:
+		fail_charge()
 
 func _input(event):
-	if event.is_action_pressed("left"):
-		pass
-	if event.is_action_pressed("right"):
-		pass
-	if event.is_action_pressed("up"):
-		pass
-	if event.is_action_pressed("down"):
-		pass
+	if event.is_action_pressed("attack"):
+		if charged > 0.0:
+			if time - charge_time > 0.2:
+				charged = 0.0
+			else:
+				fail_charge()
+		else:
+			$AnimationTree["parameters/Punch/active"] = true
+	elif event.is_action_pressed("charge") and not $AnimationTree["parameters/Charge/active"]:
+		$AnimationTree["parameters/Charge/active"] = true
+		$AnimationTree["parameters/Charge SM/playback"].travel("Charge")
+		charged = 1.0
+		charge_time = time
+
+func fail_charge():
+	$AnimationTree["parameters/Charge SM/playback"].travel("Cancel")
+	charged =  0.0
