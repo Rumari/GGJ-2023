@@ -1,7 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://shaders/Pixels.tres" type="Shader" id=1]
 [ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sound/GRITTY 5-Sapphire Bounce.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/sound/GRITTY 3-Guitar Plucker.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/sound/GRITTY 2-Sage Reef Kit.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sound/GRITTY 1-E-Piano F 82bpm.wav" type="AudioStream" id=6]
+[ext_resource path="res://addons/mixing-desk/music/song.gd" type="Script" id=7]
+[ext_resource path="res://addons/mixing-desk/music/mixing_desk_music.gd" type="Script" id=8]
+[ext_resource path="res://addons/mixing-desk/music/containers/core_cont.gd" type="Script" id=9]
 
 [sub_resource type="Environment" id=3]
 ambient_light_color = Color( 1, 1, 1, 1 )
@@ -43,3 +50,32 @@ transform = Transform( 0.89111, 0.364153, -0.27077, 0, 0.596687, 0.802474, 0.453
 [node name="Floor" type="MeshInstance" parent="."]
 transform = Transform( 10, 0, 0, 0, 1, 0, 0, 0, 10, 0.584804, 0, -10.7871 )
 mesh = SubResource( 4 )
+
+[node name="MixingDeskMusic" type="Node" parent="."]
+script = ExtResource( 8 )
+play_mode = 1
+autoplay = true
+
+[node name="Level Theme" type="Node" parent="MixingDeskMusic"]
+script = ExtResource( 7 )
+tempo = 79
+bars = 4
+beats_in_bar = 4
+transition_beats = 2.0
+auto_transition = true
+transition_type = "Bar"
+
+[node name="CoreContainer" type="Node" parent="MixingDeskMusic/Level Theme"]
+script = ExtResource( 9 )
+
+[node name="piano" type="AudioStreamPlayer" parent="MixingDeskMusic/Level Theme/CoreContainer"]
+stream = ExtResource( 6 )
+
+[node name="drums" type="AudioStreamPlayer" parent="MixingDeskMusic/Level Theme/CoreContainer"]
+stream = ExtResource( 5 )
+
+[node name="pluck_guitar" type="AudioStreamPlayer" parent="MixingDeskMusic/Level Theme/CoreContainer"]
+stream = ExtResource( 4 )
+
+[node name="weird_sound" type="AudioStreamPlayer" parent="MixingDeskMusic/Level Theme/CoreContainer"]
+stream = ExtResource( 3 )
