@@ -29,18 +29,18 @@ transform = Transform( 1, 0, 0, 0, 0.766044, 0.642787, 0, -0.642787, 0.766044, 0
 environment = SubResource( 3 )
 fov = 63.3243
 
-[node name="Pixels" type="CanvasLayer" parent="."]
+[node name="Canvas" type="CanvasLayer" parent="."]
 
-[node name="ColorRect" type="ColorRect" parent="Pixels"]
+[node name="Pixels" type="ColorRect" parent="Canvas"]
 material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="HUD" type="Control" parent="Pixels"]
+[node name="HUD" type="Control" parent="Canvas"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="EnergyBar" type="TextureProgress" parent="Pixels/HUD"]
+[node name="EnergyBar" type="TextureProgress" parent="Canvas/HUD"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 486.0
