@@ -126,6 +126,8 @@ func attack():
 		punching = true
 		punching_time = DAMAGE_DELAY
 		$AnimationTree["parameters/Punch/active"] = true
+		$AudioStreamPlayer.set_stream(Globals.HitFX)
+		$AudioStreamPlayer.play()
 
 func hit(damage):
 	if health == 0.0:
@@ -136,6 +138,8 @@ func hit(damage):
 		health = 0.0
 		emit_signal("died", self)
 		$AnimationTree["parameters/Death/active"] = true
+		$AudioStreamPlayer.set_stream(Globals.EnemyDamageFX)
+		$AudioStreamPlayer.play()
 
 func to_plane(pos):
 	return Vector2(pos.x, pos.z)

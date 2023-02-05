@@ -36,6 +36,7 @@ tracks/1/keys = {
 
 [node name="Level 1" type="Spatial"]
 script = ExtResource( 3 )
+optimality = 1.0
 
 [node name="Enemy Controller" parent="." instance=ExtResource( 1 )]
 player = NodePath("../Player")

@@ -131,10 +131,13 @@ func attack():
 			return false
 			
 	# attack nearby enemies
+	$AudioStreamPlayer.set_stream(Globals.HitFX)
+	$AudioStreamPlayer.play()
 	for enemy in $Hit.get_overlapping_bodies():
 		enemy.hit(damage)
 	return true
 
 func hit(damage):
 	# called when an enemy hits the player
+	$AnimationTree["parameters/playback"].travel("Damaged")
 	energy -= damage

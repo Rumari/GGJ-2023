@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://shaders/Pixels.tres" type="Shader" id=1]
 [ext_resource path="res://scenes/Level 1.tscn" type="PackedScene" id=2]
@@ -12,10 +12,6 @@
 [ext_resource path="res://assets/images/bar.png" type="Texture" id=10]
 [ext_resource path="res://assets/images/bar_juice1.png" type="Texture" id=11]
 [ext_resource path="res://assets/images/bar_under.png" type="Texture" id=12]
-[ext_resource path="res://assets/fx/hit.mp3" type="AudioStream" id=13]
-[ext_resource path="res://assets/fx/miss.mp3" type="AudioStream" id=14]
-[ext_resource path="res://assets/fx/enemy_death.mp3" type="AudioStream" id=15]
-[ext_resource path="res://assets/fx/enemy_damage.mp3" type="AudioStream" id=16]
 [ext_resource path="res://scenes/EnergyBar.gd" type="Script" id=17]
 
 [sub_resource type="Environment" id=3]
@@ -340,20 +336,6 @@ stream = ExtResource( 4 )
 
 [node name="weird_sound" type="AudioStreamPlayer" parent="MixingDeskMusic/LevelTheme/CoreContainer"]
 stream = ExtResource( 3 )
-
-[node name="Sound Effects" type="Node" parent="."]
-
-[node name="hit" type="AudioStreamPlayer" parent="Sound Effects"]
-stream = ExtResource( 13 )
-
-[node name="miss" type="AudioStreamPlayer" parent="Sound Effects"]
-stream = ExtResource( 14 )
-
-[node name="enemy_death" type="AudioStreamPlayer" parent="Sound Effects"]
-stream = ExtResource( 15 )
-
-[node name="enemy_damage" type="AudioStreamPlayer" parent="Sound Effects"]
-stream = ExtResource( 16 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
