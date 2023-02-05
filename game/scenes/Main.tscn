@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://shaders/Pixels.tres" type="Shader" id=1]
 [ext_resource path="res://scenes/Level 1.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://assets/fx/miss.mp3" type="AudioStream" id=14]
 [ext_resource path="res://assets/fx/enemy_death.mp3" type="AudioStream" id=15]
 [ext_resource path="res://assets/fx/enemy_damage.mp3" type="AudioStream" id=16]
+[ext_resource path="res://scenes/EnergyBar.gd" type="Script" id=17]
 
 [sub_resource type="Environment" id=3]
 
@@ -309,6 +310,7 @@ texture_under = ExtResource( 12 )
 texture_over = ExtResource( 10 )
 texture_progress = ExtResource( 11 )
 texture_progress_offset = Vector2( 9, 3 )
+script = ExtResource( 17 )
 
 [node name="MixingDeskMusic" type="Node" parent="."]
 script = ExtResource( 8 )

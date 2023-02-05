@@ -71,7 +71,6 @@ func _physics_process(delta):
 
 func _input(event):
 	var node = $AnimationTree["parameters/playback"].get_current_node()
-	var success = true
 	if event.is_action_pressed("attack") and node == "Moving":
 		if attack():
 			$AnimationTree["parameters/playback"].travel("Punch")
