@@ -1,9 +1,0 @@
-function on_message(self, message_id, message, sender)
-	if message_id == hash("set_lore") then
-		local t = gui.get_node("text")
-		gui.set_text(t, message.lore)
-		gui.animate(t, "color.w", 1, gui.EASING_LINEAR, 15, 0, function()
-			msg.post("#lore", "next")
-		end, gui.PLAYBACK_ONCE_PINGPONG)
-	end
-end

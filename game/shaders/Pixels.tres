@@ -1,0 +1,12 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform int amount = 256;
+
+void fragment()
+{
+	vec2 grid_uv = round(SCREEN_UV * float(amount)) / float(amount);
+	COLOR = textureLod(SCREEN_TEXTURE, grid_uv, 0);
+}"
