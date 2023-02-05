@@ -123,13 +123,13 @@ func attack():
 	
 	if optimality == 0.0:
 		spend_energy(MISS_PENALTY)
-		# todo: play anim?
+		$AnimationTree["parameters/playback"].travel("Miss")
 		return false
 	else:
 		var cost = (1.0 - optimality) * ATTACK_ENERGY
 		if not spend_energy(cost):
 			return false
-			
+
 	# attack nearby enemies
 	$AudioStreamPlayer.set_stream(Globals.HitFX)
 	$AudioStreamPlayer.play()

@@ -138,6 +138,9 @@ func hit(damage):
 		health = 0.0
 		emit_signal("died", self)
 		$AnimationTree["parameters/Death/active"] = true
+		$AudioStreamPlayer.set_stream(Globals.EnemyDeathFX)
+		$AudioStreamPlayer.play()
+	else:
 		$AudioStreamPlayer.set_stream(Globals.EnemyDamageFX)
 		$AudioStreamPlayer.play()
 
