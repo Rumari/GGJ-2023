@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://assets/materials/Player.material" type="Material" id=1]
 [ext_resource path="res://assets/animations/player/Chicken Dance.tres" type="Animation" id=2]
@@ -300,14 +300,25 @@ animation = "Charge"
 [sub_resource type="AnimationNodeAnimation" id=27]
 animation = "Charged Punch"
 
-[sub_resource type="AnimationNodeAnimation" id=58]
-animation = "Chicken Dance"
-
 [sub_resource type="AnimationNodeAnimation" id=55]
 animation = "Damaged"
 
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=58]
+animation = "Death"
+
+[sub_resource type="AnimationNodeAnimation" id=60]
 animation = "Big Hit To Head"
+
+[sub_resource type="AnimationNodeTimeScale" id=61]
+
+[sub_resource type="AnimationNodeBlendTree" id=62]
+graph_offset = Vector2( -272.605, 123.375 )
+nodes/Animation/node = SubResource( 60 )
+nodes/Animation/position = Vector2( -20, 140 )
+nodes/TimeScale/node = SubResource( 61 )
+nodes/TimeScale/position = Vector2( 240, 140 )
+nodes/output/position = Vector2( 440, 140 )
+node_connections = [ "output", 0, "TimeScale", "TimeScale", 0, "Animation" ]
 
 [sub_resource type="AnimationNodeAnimation" id=29]
 animation = "Walking"
@@ -353,15 +364,6 @@ xfade_time = 0.2
 [sub_resource type="AnimationNodeStateMachineTransition" id=37]
 xfade_time = 0.3
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=39]
-switch_mode = 1
-xfade_time = 0.2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
-switch_mode = 2
-auto_advance = true
-xfade_time = 0.2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=44]
 switch_mode = 1
 auto_advance = true
@@ -371,8 +373,6 @@ xfade_time = 0.6
 switch_mode = 2
 auto_advance = true
 xfade_time = 0.3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=47]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=51]
 xfade_time = 0.1
@@ -390,6 +390,18 @@ auto_advance = true
 xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=59]
+xfade_time = 0.3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=63]
+switch_mode = 1
+xfade_time = 0.2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=64]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=65]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.2
 
 [sub_resource type="AnimationNodeStateMachine" id=42]
 "states/Body Block/node" = SubResource( 25 )
@@ -398,19 +410,19 @@ states/Charge/node = SubResource( 26 )
 states/Charge/position = Vector2( 677, 189 )
 "states/Charged Punch/node" = SubResource( 27 )
 "states/Charged Punch/position" = Vector2( 555, 87 )
-"states/Chicken Dance/node" = SubResource( 58 )
-"states/Chicken Dance/position" = Vector2( 224, 305 )
 states/Damaged/node = SubResource( 55 )
 states/Damaged/position = Vector2( 364, 87 )
-states/Miss/node = SubResource( 28 )
-states/Miss/position = Vector2( 677, 305 )
+states/Death/node = SubResource( 58 )
+states/Death/position = Vector2( 217, 305 )
+states/Miss/node = SubResource( 62 )
+states/Miss/position = Vector2( 623, 305 )
 states/Moving/node = SubResource( 32 )
 states/Moving/position = Vector2( 426, 189 )
 states/Punch/node = SubResource( 50 )
 states/Punch/position = Vector2( 426, 305 )
-transitions = [ "Moving", "Charge", SubResource( 34 ), "Charge", "Charged Punch", SubResource( 35 ), "Moving", "Body Block", SubResource( 37 ), "Charge", "Miss", SubResource( 39 ), "Miss", "Moving", SubResource( 41 ), "Body Block", "Moving", SubResource( 44 ), "Charged Punch", "Moving", SubResource( 46 ), "Moving", "Miss", SubResource( 47 ), "Moving", "Punch", SubResource( 51 ), "Punch", "Moving", SubResource( 52 ), "Moving", "Damaged", SubResource( 56 ), "Damaged", "Moving", SubResource( 57 ), "Moving", "Chicken Dance", SubResource( 59 ) ]
+transitions = [ "Moving", "Charge", SubResource( 34 ), "Charge", "Charged Punch", SubResource( 35 ), "Moving", "Body Block", SubResource( 37 ), "Body Block", "Moving", SubResource( 44 ), "Charged Punch", "Moving", SubResource( 46 ), "Moving", "Punch", SubResource( 51 ), "Punch", "Moving", SubResource( 52 ), "Moving", "Damaged", SubResource( 56 ), "Damaged", "Moving", SubResource( 57 ), "Moving", "Death", SubResource( 59 ), "Charge", "Miss", SubResource( 63 ), "Moving", "Miss", SubResource( 64 ), "Miss", "Moving", SubResource( 65 ) ]
 start_node = "Moving"
-graph_offset = Vector2( -90, 14.3927 )
+graph_offset = Vector2( -101, 125.393 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=43]
 
@@ -657,6 +669,7 @@ tree_root = SubResource( 42 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 43 )
+parameters/Miss/TimeScale/scale = 1.5
 parameters/Moving/Speed/blend_amount = 0
 parameters/Punch/TimeScale/scale = 1.5
 
