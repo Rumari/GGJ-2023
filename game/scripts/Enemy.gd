@@ -78,7 +78,7 @@ func _process(delta):
 			punching_time -= delta
 			if punching_time <= 0.0:
 				punching = false
-				player.hit(LIGHT_DAMAGE)
+				player.hit(-player_dir, LIGHT_DAMAGE)
 
 func _physics_process(delta):
 	if health == 0.0:

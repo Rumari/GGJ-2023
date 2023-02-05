@@ -402,7 +402,7 @@ states/Punch/node = SubResource( 50 )
 states/Punch/position = Vector2( 426, 305 )
 transitions = [ "Moving", "Charge", SubResource( 34 ), "Charge", "Charged Punch", SubResource( 35 ), "Moving", "Body Block", SubResource( 37 ), "Charge", "Miss", SubResource( 39 ), "Miss", "Moving", SubResource( 41 ), "Body Block", "Moving", SubResource( 44 ), "Charged Punch", "Moving", SubResource( 46 ), "Moving", "Miss", SubResource( 47 ), "Moving", "Punch", SubResource( 51 ), "Punch", "Moving", SubResource( 52 ), "Moving", "Damaged", SubResource( 56 ), "Damaged", "Moving", SubResource( 57 ) ]
 start_node = "Moving"
-graph_offset = Vector2( -90, 14.3927 )
+graph_offset = Vector2( -238, 57.3927 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=43]
 
